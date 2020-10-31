@@ -15,9 +15,7 @@ function Obj_Ship_Player() {
   this.spriteDamaged = document.getElementById('Asset-Ship-Damaged');
   this.spriteShielded = document.getElementById('Asset-Ship-Shielded');
   this.spriteShieldedHit = document.getElementById('Asset-Ship-Shielded-Hit');
-  this.soundShieldCharge = document.getElementById('Sound-Shield-Charge');
   this.soundShieldEnabled = document.getElementById('Sound-Shield-Enabled');
-  this.soundUiWeaponReady = document.getElementById('Sound-Ui-Weapon-Ready');
   this.soundUiFunctionBlocked = document.getElementById('Sound-Ui-Function-Blocked');
   this.soundEngineThruster = document.getElementById('Sound-Engine-Thruster');
   this.soundWeapon = null;
@@ -465,11 +463,7 @@ function Obj_Ship_Player() {
    * @private
    */
   this.fireWeaponCooldown = () => {
-    const sound = this.soundUiWeaponReady;
-
     this.weaponCooldown = false;
-    sound.volume = 0.4;
-    sound.play();
   };
 
   // --------------------------------------------------------------------------------------------------------- Shields
@@ -482,16 +476,11 @@ function Obj_Ship_Player() {
    */
   this.enableShield = () => {
     let audioShield;
-    let audioShieldCharge;
 
     if (!this.shieldCooldown) {
       if (!this.shieldActive) {
         this.shieldActive = true;
         this.shieldCooldown = true;
-
-        audioShieldCharge = this.soundShieldCharge;
-        audioShieldCharge.volume = 0.2;
-        audioShieldCharge.play();
 
         window.setTimeout(() => {
           audioShield = this.soundShieldEnabled;
