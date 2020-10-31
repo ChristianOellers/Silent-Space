@@ -1,0 +1,52 @@
+/**
+ * Images are randomly chosen in JS.
+ */
+
+.static-image {
+  animation: backgroundMove 300s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  will-change: background-position;
+}
+
+.static-image-0 {
+  background: url('../../assets/images/background/static/0.jpg') 0% 0%;
+}
+
+.static-image-1 {
+  background: url('../../assets/images/background/static/1.jpg') 0% 0%;
+}
+
+.static-image-2 {
+  background: url('../../assets/images/background/static/2.jpg') 0% 0%;
+}
+
+.static-image-3 {
+  background: url('../../assets/images/background/static/3.jpg') 0% 0%;
+}
+
+.static-image-4 {
+  background: url('../../assets/images/background/static/4.jpg') 0% 0%;
+}
+
+.static-image .background {
+  display: none;
+}
+
+@-webkit-keyframes backgroundMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  25% {
+    background-position: 100% 100%;
+  }
+  50% {
+    background-position: 50% 50%;
+  }
+  75% {
+    background-position: 100% 0%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

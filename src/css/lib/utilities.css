@@ -1,0 +1,5 @@
+/* stylelint-disable declaration-no-important */
+
+.hidden {
+  display: none !important;
+}

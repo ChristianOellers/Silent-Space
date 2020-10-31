@@ -1,0 +1,48 @@
+# Compiled output
+/build
+/dist
+/documentation
+/out-tsc
+/tmp
+
+# Composer
+vendor
+composer.lock
+
+# Dependencies
+/node_modules
+package-lock.json
+
+# IDEs + Editors
+*.launch
+*.sublime-workspace
+/.idea
+.c9
+.classpath
+.history
+.project
+.settings
+
+# IDE - VSCode
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+/typings
+npm-debug.log
+php_errorlog
+testem.log
+yarn-error.log
+
+# System files
+*/*.lnk
+*desktop.ini
+.DS_Store
+Thumbs.db

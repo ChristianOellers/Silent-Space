@@ -1,0 +1,20 @@
+:root {
+  /* Layout */
+  --sg-app-width: 800px;
+  --sg-app-height: 500px;
+
+  /* Type */
+  --sg-font-primary: 'MuseoModerno', sans-serif;
+  --sg-font-secondary: sans-serif;
+
+  /* Colors - Layout */
+  --sg-color-border: #111;
+  --sg-color-background: #000;
+
+  /* Colors - Text */
+  --sg-color-text: #555;
+
+  /* Colors - UI */
+  --sg-color-btn-text: #eee;
+  --sg-color-btn-background: rgba(40, 45, 45, 1);
+}

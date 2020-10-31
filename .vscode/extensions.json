@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    // General
+    "dbaeumer.vscode-eslint",
+    "editorconfig.editorconfig",
+    "esbenp.prettier-vscode",
+    // Project
+    "mkaufman.htmlhint",
+    "stylelint.vscode-stylelint",
+    // Workflow
+    "christian-kohler.path-intellisense",
+    "msjsdiag.debugger-for-chrome"
+  ]
+}
