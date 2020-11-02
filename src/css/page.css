@@ -1,7 +1,0 @@
-html,
-body {
-  background: var(--sg-color-background);
-
-  /* Intentionally enforced as browser scrollbars interfere with the game controls */
-  overflow: hidden;
-}
