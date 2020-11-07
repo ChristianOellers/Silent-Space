@@ -20,18 +20,38 @@ A proof of concept about what can be done with plain Canvas, JavaScript and a bi
 
 ### Playing
 
-The ship has a few controls to try out. Besides hopefully enjoying the in-game visuals and audio, there's not much to do (no enemies).
-Let it run as background animation if you like, get inspired; or challenged by the greatest enemy of all: The monstrous source code 🤓
+There are a few implicit and random mechanics, as these have been simple to realize without too much conceptual complexity.
+
+Besides hopefully enjoying the in-game visuals and audio, there's not much to do yet. Let it run as background animation if you like, get inspired; or challenged by the greatest enemy of all: The monstrous source code.
+
+#### Mechanics
+
+- Every game start (or reload) generates a different background and some ship settings change slightly
+- Shooting the weapon might hit something out of screen
+  - On every hit, there's a chance to switch weapons randomly
+
+#### Effects
+
+- Background changes position over time
+- Shield activation causes HUD flickering
+- Being hit by space debris ...
+  - changes ship model to broken state
+  - causes screen flickering (stereo 3D effect)
+  - changes shield color (visible on next activation)
 
 ### Code
 
-The project started in 2013 and received a few random updates over later years. As this is an old project, built on old technologies as proof of concept, please excuse any architectural mess-ups.
+The project started in 2013 and received a few random updates over later years. 2020 I decided to start rebuilding it with current technologies and skills, but it's quite a process!
+
+As this is a legacy built and proof of concept, please excuse any architectural mess-ups. This has never been the focus, but definitely should be in the future.
+
+- [View historical release »](https://github.com/ChristianOellers/2D-Space-Shooter-Concept/releases)
 
 ### Features & Gameplay
 
 - On each game start the ship attributes, weapons and sounds are slightly randomized.
 - You can shoot, toggle the shields and move the ship.
-  - Shooting might explode something mysterious out of screen and reward you with a screen shake 😃
+  - Shooting might explode something mysterious out of screen and reward you with a screen shake
 
 There are no actual enemies yet. Please use your nerdy imagination for that.
 
@@ -69,13 +89,12 @@ Audio files are in `.wav` and `.ogg` format. Your browser might support somethin
 
 ### Audio files
 
-| Type  | Category       | Source            | License                                                      | Content ID                                                        | Author + Website                                                                                              |
-| ----- | -------------- | ----------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| Sound | Engine         | freesound         | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [159012](https://freesound.org/people/MortisBlack/sounds/159012)  | [primeval_polypod](https://freesound.org/people/primeval_polypod)                                             |
-| Sound | Explosion      | freesound         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0) | [147583](https://freesound.org/people/CaCtUs2003/sounds/147583)   | [CaCtUs2003](https://freesound.org/people/CaCtUs2003)                                                         |
-| Sound | Explosion      | freesound         | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [108640](https://freesound.org/people/juskiddink/sounds/108640)   | [juskiddink](https://freesound.org/people/juskiddink)                                                         |
-| Sound | Laser          | freesound         | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [151013](https://freesound.org/people/bubaproducer/sounds/151013) | [bubaproducer](https://freesound.org/people/bubaproducer) <br> [Antisample](https://antisample.com)           |
-| Sound | Laser          | freesound         | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [151020](https://freesound.org/people/bubaproducer/sounds/151020) | [bubaproducer](https://freesound.org/people/bubaproducer) <br> [Antisample](https://antisample.com)           |
-| Sound | Shield Enabled | freesound         | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [385051](https://freesound.org/people/MortisBlack/sounds/385051)  | [MortisBlack](https://freesound.org/people/MortisBlack) <br> [SoundCloud](https://soundcloud.com/mortisblack) |
-| Music | Shield Charge  | Christian Oellers | MIT                                                          | ShieldEnabled                                                     | [ChristianOellers](https://github.com/ChristianOellers)                                                       |
-| Music | Ambient        | Danny Grübl       | Copyrighted                                                  | DG-Space-Ambient                                                  | [hans-sperling](https://github.com/hans-sperling)                                                             |
+| Type  | Category       | Source      | License                                                      | Content ID                                                        | Author + Website                                                                                              |
+| ----- | -------------- | ----------- | ------------------------------------------------------------ | ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| Sound | Engine         | freesound   | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [159012](https://freesound.org/people/MortisBlack/sounds/159012)  | [primeval_polypod](https://freesound.org/people/primeval_polypod)                                             |
+| Sound | Explosion      | freesound   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0) | [147583](https://freesound.org/people/CaCtUs2003/sounds/147583)   | [CaCtUs2003](https://freesound.org/people/CaCtUs2003)                                                         |
+| Sound | Explosion      | freesound   | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [108640](https://freesound.org/people/juskiddink/sounds/108640)   | [juskiddink](https://freesound.org/people/juskiddink)                                                         |
+| Sound | Laser          | freesound   | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [151013](https://freesound.org/people/bubaproducer/sounds/151013) | [bubaproducer](https://freesound.org/people/bubaproducer) <br> [Antisample](https://antisample.com)           |
+| Sound | Laser          | freesound   | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [151020](https://freesound.org/people/bubaproducer/sounds/151020) | [bubaproducer](https://freesound.org/people/bubaproducer) <br> [Antisample](https://antisample.com)           |
+| Sound | Shield Enabled | freesound   | [CC BY 3.0](https://creativecommons.org/licenses/by/3.0)     | [385051](https://freesound.org/people/MortisBlack/sounds/385051)  | [MortisBlack](https://freesound.org/people/MortisBlack) <br> [SoundCloud](https://soundcloud.com/mortisblack) |
+| Music | Ambient        | Danny Grübl | © Copyright                                                  | DG-Space-Ambient                                                  | [hans-sperling](https://github.com/hans-sperling)                                                             |
