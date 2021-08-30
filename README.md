@@ -1,6 +1,8 @@
 [![2D Space Shooter Concept](teaser.png)](https://christianoellers.github.io/2D-Space-Shooter-Concept)
 
-# Experimental game
+# 2D Space Shooter Concept
+
+Experimental game
 
 - [About](#about)
 - [Examples](#examples)
