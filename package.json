@@ -4,7 +4,6 @@
   "author": "Christian Oellers",
   "license": "MIT",
   "version": "0.0.1",
-  "main": "src/index.html",
   "private": true,
   "scripts": {
     "start": "npx serve 'src'",
