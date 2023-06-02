@@ -14,6 +14,7 @@ Experimental game
 
 ---
 
+[![Quality Gate status](https://sonarcloud.io/api/project_badges/measure?project=ChristianOellers_2D-Space-Shooter-Concept&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChristianOellers_2D-Space-Shooter-Concept)
 <br><br>
 
 ## About
