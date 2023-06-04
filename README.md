@@ -1,6 +1,6 @@
-[![2D Space Shooter Concept](teaser.png)](https://christianoellers.github.io/2D-Space-Shooter-Concept)
+[![2D Space Shooter](teaser.png)](https://christianoellers.github.io/2D-Space-Shooter-Concept)
 
-# Void Escape - Experimental space shooter
+# Space Escape - Experimental space shooter
 
 Atmospheric and experimental 2D game concept.
 
