@@ -10,7 +10,6 @@ Atmospheric and experimental 2D game concept.
 - [Issues](#issues)
 - [Credits](#credits)
 - [Contributors](#contributors)
-- [Todo](#todo)
 
 <br>
 
@@ -21,7 +20,9 @@ Atmospheric and experimental 2D game concept.
 
 ## About
 
-A proof of concept about what can be done with plain Canvas, JavaScript and a bit of auditory and visual trickery. It's been intended to be somewhat 'arcade-ish', but with a more decent pace and visual focus.
+A proof of concept about what can be done with plain Canvas, JavaScript and a bit of auditory and visual trickery.
+
+It's been intended to be somewhat 'arcade-ish', but with a more decent pace and visual focus.
 
 ### Playing
 
@@ -90,6 +91,14 @@ Browsers might block automatic playing audio. Workaround to manually trigger thi
 
 Audio files are in `.wav` and `.ogg` format. Your browser might support something which is not available. In that case, please use another browser (like Chrome or Firefox).
 
+### Code quality
+
+As this has been developed as pure proof of concept, across 10+ years so far; it is considered legacy.
+There's many bad practices like closely coupled code. Writing a game that involves changing feature sets and design decisions is a time consuming task.
+That's why I considered to spend my spare time on developing the game itself, not making the code beautiful.
+
+See it as technology junkyard, to pick from what you need and build your own ;)
+
 <br><br>
 
 ## Credits
@@ -114,17 +123,3 @@ Some sounds have been edited.
 Thanks for all the support, help and creative feedback!
 
 - Danny N. Grübl
-
-<br><br>
-
-## Todo
-
-See code comments `@todo`. Besides that:
-
-### Engine features
-
-- Enable rendering of multiple elements per canvas (e.g. particles)
-
-### Optimizations
-
-- Refactor and simplify event handling, especially the wildly spread identifiers and triggers.
