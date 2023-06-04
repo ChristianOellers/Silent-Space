@@ -41,6 +41,11 @@ function Obj_Background() {
    * @public
    */
   this.init = () => {
+    // eslint-disable-next-line no-console
+    console.warn('Module disabled - Ken Burns effect used instead');
+    return false;
+
+    /* * /
     this.canvas0 = document.getElementById('Background');
     this.canvas1 = document.getElementById('Foreground');
     this.ctx0 = this.canvas0.getContext('2d');
@@ -48,6 +53,7 @@ function Obj_Background() {
 
     this.createTileTypeList();
     this.createQueue();
+    /* */
   };
 
   /**

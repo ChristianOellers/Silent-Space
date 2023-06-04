@@ -17,34 +17,38 @@
     <link rel="stylesheet" href="css/app/fx.css" />
     <link rel="stylesheet" href="css/app/menu.css" />
   </head>
-  <body>
-    <section id="App" class="app">
-      <div id="Fx" class="app-layer">
-        <canvas width="800" height="500" id="Background" class="background"></canvas>
-        <canvas width="800" height="500" id="Particles"></canvas>
-        <canvas width="800" height="500" id="Weapons"></canvas>
-        <canvas width="800" height="500" id="Game"></canvas>
-        <canvas width="800" height="500" id="Foreground"></canvas>
-        <canvas width="800" height="500" id="Hud"></canvas>
-      </div>
-      <nav id="Ui-Menu" class="app-layer menu">
-        <button id="Ui-Btn-Play" class="btn">Play</button>
-      </nav>
-    </section>
+  <body id="App-Container">
+    <div id="Bg-Blur"></div>
 
-    <section class="details">
-      <div class="col">
-        <p class="text">Arrows = Move, C = Shield, F = Fire</p>
-        <p class="text" title="Space debris | Fired shots that hit (something ;)">
-          Debris: <span id="Score-Hits">0</span><br />
-          Hits: <span id="Score-Shots">0</span>
+    <main>
+      <section id="App" class="app">
+        <div id="Fx" class="app-layer">
+          <canvas width="800" height="500" id="Background" class="background"></canvas>
+          <canvas width="800" height="500" id="Particles"></canvas>
+          <canvas width="800" height="500" id="Weapons"></canvas>
+          <canvas width="800" height="500" id="Game"></canvas>
+          <canvas width="800" height="500" id="Foreground"></canvas>
+          <canvas width="800" height="500" id="Hud"></canvas>
+        </div>
+        <nav id="Ui-Menu" class="app-layer menu">
+          <button id="Ui-Btn-Play" class="btn">Play</button>
+        </nav>
+      </section>
+      <section class="details">
+        <div class="col">
+          <p class="text">Arrows = Move, C = Shield, F = Fire</p>
+          <p class="text" title="Space debris | Fired shots that hit (something ;)">
+            Debris: <span id="Score-Hits">0</span><br />
+            Hits: <span id="Score-Shots">0</span>
+          </p>
+        </div>
+        <p class="text">
+          Enjoy the musical and visual ambiente. Shoot the guns for some effects, and play around with being hit by particles with or
+          without shields. Reload the app for randomized background designs. Hint: There's no goal or enemies in this game. This is a tech
+          demo.
         </p>
-      </div>
-      <p class="text">
-        Enjoy the musical and visual ambiente. Shoot the guns for some effects, and play around with being hit by particles with or without
-        shields. Reload the app for randomized background designs. Hint: There's no goal or enemies in this game. This is a tech demo.
-      </p>
-    </section>
+      </section>
+    </main>
 
     <!-- Assets -->
     <div class="hidden">

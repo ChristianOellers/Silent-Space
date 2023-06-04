@@ -9,6 +9,7 @@ function Core_Ui_Menu() {
 
   // Assets
   this.appElement = document.getElementById('App');
+  this.bgBlurElement = document.getElementById('Bg-Blur');
   this.btnPlayElement = document.getElementById('Ui-Btn-Play');
   this.menuElement = document.getElementById('Ui-Menu');
 
@@ -66,6 +67,7 @@ function Core_Ui_Menu() {
       this.hideMenu();
 
       this.appElement.classList.add('-active');
+      this.bgBlurElement.classList.add('-active');
 
       // Reset to prevent duplicate calls
       this.readyCallback = null;

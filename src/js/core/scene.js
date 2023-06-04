@@ -1,6 +1,7 @@
 /**
  * Create game scene with objects and music.
  *
+ * @†odo Optimize: Make background types a choice for users?
  * @module
  */
 function Core_Scene() {
@@ -12,7 +13,8 @@ function Core_Scene() {
   this.Stage = null;
 
   // DOM
-  this.appElement = document.getElementById('App');
+  this.rootElement = document.getElementById('App-Container');
+  // this.appElement = document.getElementById('App');
 
   // DOM - Audio
   this.musicElements = [document.getElementById('Music-Ambient-Light'), document.getElementById('Music-Ambient-Dramatic')];
@@ -60,7 +62,8 @@ function Core_Scene() {
     this.createObjects();
     this.createPlayer();
 
-    this.Background.run();
+    // @todo Optimize: Use or remove background variant?
+    // this.Background.run();
     this.playMusic();
   };
 
@@ -78,16 +81,18 @@ function Core_Scene() {
   /**
    * Set random background.
    *
+   * @†odo Optimize: What background variant to use? Scroll or Ken Burns?
    * @private
    */
   this.createBackground = () => {
-    const { appElement } = this;
+    const { rootElement } = this;
     const rndStaticBackground = (Math.random() * this.backgrounds) | 0;
 
+    // @todo Optimize: Use or remove background variant?
     this.Background.init();
 
-    appElement.classList.add('static-image');
-    appElement.classList.add(`static-image-${rndStaticBackground}`);
+    rootElement.classList.add('static-image');
+    rootElement.classList.add(`static-image-${rndStaticBackground}`);
   };
 
   /**

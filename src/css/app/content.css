@@ -7,6 +7,10 @@
   box-sizing: border-box;
   margin: 0 auto;
   padding: 1rem 2.5rem;
+
+  /* Workaround to avoid invisible/blurry content */
+  z-index: 1;
+  transform: scale(1);
 }
 
 .details .col {
