@@ -10,6 +10,7 @@ Atmospheric and experimental 2D game concept.
 - [Issues](#issues)
 - [Credits](#credits)
 - [Contributors](#contributors)
+- [Todo](#todo)
 
 <br>
 
@@ -123,3 +124,28 @@ Some sounds have been edited.
 Thanks for all the support, help and creative feedback!
 
 - Danny N. Grübl
+
+<br><br>
+
+## Todo
+
+### Priority
+
+- Update background images to be brighter, nebula, interesting
+- Add win/lose condition and end screen
+  - e.g. be hit max. 3x (lifes)
+- Particles: Can multiple items be quickfixed hacked into?
+- Implement Hotkeys for weapons - 1,2
+- Implement Mouse click left/right steers like left/right (split screen)
+- Fade music from A to B (dramatic sometimes, e.g. 25% chance, never at start)
+
+### Experimental
+
+- Foreground DOM object (display, stereo)
+  - Animated by JS, moves/scrolls over screen
+  - With SVG mask
+  - With Canvas blend-mode OR background-blend
+
+### Cleanup
+
+- Integrate event library
