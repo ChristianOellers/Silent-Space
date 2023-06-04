@@ -9,10 +9,10 @@ function Core_State() {
   // Difficulty: On every reached interval, difficulty slightly incrases
   this.difficulty = 0;
   this.difficultyInterval = 1000;
-  
+
   // Keep track of player
   this.playerPosition = null; // Vector2D
-  
+
   // Internals
   this.playingTime = 0;
   this.interval = null;
@@ -23,7 +23,7 @@ function Core_State() {
   this.init = () => {
     this.increaseDifficultyOverTime();
   };
-  
+
   /**
    * Set difficulty over time.
    * Value increases with each interval step reached.
@@ -32,11 +32,11 @@ function Core_State() {
    */
   this.increaseDifficultyOverTime = () => {
     this.interval = setInterval(() => {
-      const difference = (this.playingTime % this.difficultyInterval) ? 0 : 1;
+      const difference = this.playingTime % this.difficultyInterval ? 0 : 1;
 
       this.difficulty += difference;
       this.playingTime++;
-      
+
       if (difference) {
         customEvent = new CustomEvent('State-Difficulty');
         window.dispatchEvent(customEvent);
@@ -44,4 +44,3 @@ function Core_State() {
     }, APP_GLOBAL.FPS);
   };
 }
-

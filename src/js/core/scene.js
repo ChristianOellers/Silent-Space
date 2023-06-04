@@ -12,7 +12,8 @@ function Core_Scene() {
   this.Stage = null;
 
   // DOM
-  this.musicElement = document.getElementById('Music-Ambient');
+  this.musicElement1 = document.getElementById('Music-Ambient-Light');
+  this.musicElement2 = document.getElementById('Music-Ambient-Dramatic');
   this.appElement = document.getElementById('App');
 
   // General
@@ -20,7 +21,7 @@ function Core_Scene() {
   this.backgrounds = 5;
 
   // Cannot be higher now - See 'Stage' todo
-  //this.particleCount = 1;
+  // this.particleCount = 1;
 
   /**
    * Set game objects.

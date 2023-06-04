@@ -45,9 +45,11 @@ Besides hopefully enjoying the in-game visuals and audio, there's not much to do
 
 ### Code
 
-The project started in 2013 and received a few random updates over later years. 2020 I decided to start rebuilding it with current technologies and skills, but it's quite a process!
+History
 
-As this is a legacy built and proof of concept, please excuse any architectural mess-ups. This has never been the focus, but definitely should be in the future.
+- 2013: Project start, concepts and mostly graphics. Received few random updates over later years.
+- 2020: I decided to start rebuilding it with current technologies and skills, but it's quite a process!
+- 2023: Rebuild all graphics, new game mechanics, audio, win/lose conditions, additional Fx.
 
 - [View historical release »](https://github.com/ChristianOellers/2D-Space-Shooter-Concept/releases)
 
@@ -117,4 +119,3 @@ See code comments `@todo`. Besides that:
 ### Optimizations
 
 - Refactor and simplify event handling, especially the wildly spread identifiers and triggers.
-

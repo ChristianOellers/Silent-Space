@@ -8,6 +8,7 @@
   "scripts": {
     "start": "npx serve 'src'",
     "lint:scss": "npx stylelint 'src/**/*.css'",
+    "prettier:clean": "prettier --write \"**/*.{js,css,scss}\"",
     "project:clean": "rm -rf node_modules"
   },
   "dependencies": {},
