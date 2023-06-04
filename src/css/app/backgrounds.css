@@ -49,10 +49,6 @@
   background: url('../../assets/images/background/static/4.jpg') 0% 0%;
 }
 
-.static-image .background {
-  display: none;
-}
-
 @-webkit-keyframes backgroundMove {
   0% {
     background-position: 0% 0%;

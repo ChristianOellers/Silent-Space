@@ -42,10 +42,10 @@ function Obj_Background() {
    */
   this.init = () => {
     // eslint-disable-next-line no-console
-    console.warn('Module disabled - Ken Burns effect used instead');
-    return false;
+    // console.warn('Module disabled - Ken Burns effect used instead');
+    // return false;
 
-    /* * /
+    /* */
     this.canvas0 = document.getElementById('Background');
     this.canvas1 = document.getElementById('Foreground');
     this.ctx0 = this.canvas0.getContext('2d');
@@ -114,7 +114,7 @@ function Obj_Background() {
 
     // eslint-disable-next-line no-restricted-syntax, guard-for-in
     for (obj in this.Queue0) {
-      this.ctx0.drawImage(this.Queue0[obj].img, 0, this.Queue0[obj].posY, this.canvas0.width, this.tileHeight);
+      // this.ctx0.drawImage(this.Queue0[obj].img, 0, this.Queue0[obj].posY, this.canvas0.width, this.tileHeight);
     }
 
     // eslint-disable-next-line no-restricted-syntax, guard-for-in

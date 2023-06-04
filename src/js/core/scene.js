@@ -63,7 +63,7 @@ function Core_Scene() {
     this.createPlayer();
 
     // @todo Optimize: Use or remove background variant?
-    // this.Background.run();
+    this.Background.run();
     this.playMusic();
   };
 
@@ -88,7 +88,6 @@ function Core_Scene() {
     const { rootElement } = this;
     const rndStaticBackground = (Math.random() * this.backgrounds) | 0;
 
-    // @todo Optimize: Use or remove background variant?
     this.Background.init();
 
     rootElement.classList.add('static-image');
