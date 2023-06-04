@@ -1,10 +1,14 @@
 /**
- * Images are randomly chosen in JS.
+ * Blending effect improvements.
  */
 
 #Weapons {
   mix-blend-mode: lighten;
 }
+
+/**
+ * Blurry background + animation.
+ */
 
 #Bg-Blur {
   position: fixed;
@@ -21,6 +25,10 @@
 #Bg-Blur.-active {
   backdrop-filter: blur(0);
 }
+
+/**
+ * Images are randomly chosen in JS.
+ */
 
 .static-image {
   animation: backgroundMove 300s;

@@ -17,7 +17,7 @@ function Obj_Background() {
   this.interval = null; // Interval object for alternate animation type
 
   // Tiles
-  this.TileTypes0Count = 4; // Different tile graphics (img assets), Number 0-N
+  this.TileTypes0Count = 9; // Different tile graphics (img assets), Number 0-N
   this.TileTypes1Count = 9; // Different tile graphics (img assets), Number 0-N
   this.TileTypes0 = []; // Available different tile types
   this.TileTypes1 = []; // Available different tile types
@@ -25,8 +25,8 @@ function Obj_Background() {
   // General
   this.tileHeight = 500; // Tile graphic height in px
   this.maxHeight = 500; // Level height, e.g. canvas0.height | fixed value
-  this.scrollSpeed0 = 0.4; // How fast the level will scroll in px
-  this.scrollSpeed1 = 1.0; // How fast the level will scroll in px
+  this.scrollSpeed0 = 6 * 1.0; // How fast the level will scroll in px
+  this.scrollSpeed1 = 3 * 0.5; // How fast the level will scroll in px
 
   // Internal
   this.Queue0 = []; // Current animation queue with a few required tiles
@@ -41,19 +41,13 @@ function Obj_Background() {
    * @public
    */
   this.init = () => {
-    // eslint-disable-next-line no-console
-    // console.warn('Module disabled - Ken Burns effect used instead');
-    // return false;
-
-    /* */
-    this.canvas0 = document.getElementById('Background');
+    this.canvas0 = document.getElementById('Foreground-Blur');
     this.canvas1 = document.getElementById('Foreground');
     this.ctx0 = this.canvas0.getContext('2d');
     this.ctx1 = this.canvas1.getContext('2d');
 
     this.createTileTypeList();
     this.createQueue();
-    /* */
   };
 
   /**
@@ -115,7 +109,7 @@ function Obj_Background() {
 
     // eslint-disable-next-line no-restricted-syntax, guard-for-in
     for (obj in this.Queue0) {
-      // this.ctx0.drawImage(this.Queue0[obj].img, 0, this.Queue0[obj].posY, this.canvas0.width, this.tileHeight);
+      this.ctx0.drawImage(this.Queue0[obj].img, 0, this.Queue0[obj].posY, this.canvas0.width, this.tileHeight);
     }
 
     // eslint-disable-next-line no-restricted-syntax, guard-for-in

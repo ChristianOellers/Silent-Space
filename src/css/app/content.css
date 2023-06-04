@@ -29,6 +29,10 @@
   user-select: none;
 }
 
+/**
+ * Texts.
+ */
+
 ::selection {
   color: var(--sg-color-text);
   background: var(--sg-color-background);

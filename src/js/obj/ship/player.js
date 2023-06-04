@@ -92,6 +92,8 @@ function Obj_Ship_Player() {
 
   /**
    * Set player weapon.
+   *
+   * @todo Refactor: Move into weapon classes.
    */
   this.setWeapon = (type) => {
     switch (type) {
@@ -486,7 +488,7 @@ function Obj_Ship_Player() {
       // Reset FX for next animation
       FxShake.reset();
 
-      this.soundWeapon.volume = 0.5;
+      this.soundWeapon.volume = 0.35;
       this.soundWeapon.play();
 
       const Weapon = new this.WeaponType();

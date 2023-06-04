@@ -1,3 +1,7 @@
+/**
+ * Game (Canvas container).
+ */
+
 .app {
   border: 1px solid var(--sg-color-border);
   overflow: hidden;
@@ -16,6 +20,18 @@
   transform: scale(1);
 }
 
+.app-layer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/**
+ * Canvas + Fx.
+ */
+
 .app canvas {
   filter: saturate(125%) url(#Fx-Anaglyph3D);
   position: absolute;
@@ -25,12 +41,4 @@
 
 .app canvas.fx-displace {
   filter: saturate(25%) url(#Fx-Displace);
-}
-
-.app-layer {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
 }
