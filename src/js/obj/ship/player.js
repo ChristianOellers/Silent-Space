@@ -187,22 +187,10 @@ function Obj_Ship_Player() {
    * @todo Refactor: Change to polymorphic structure.
    */
   this.getRandomWeapon = () => {
-    const rnd = parseInt((Math.random() * 100) % 3, 10);
-    let weapon = '';
+    const weaponTypes = 2;
+    const rnd = parseInt((Math.random() * 100) % weaponTypes, 10);
 
-    switch (rnd) {
-      case 0:
-        weapon = 'beam';
-        break;
-      case 1:
-        weapon = 'phaser';
-        break;
-      default:
-        weapon = 'laser';
-        break;
-    }
-
-    return weapon;
+    return !rnd ? 'beam' : 'phaser';
   };
 
   // ------------------------------------------------------------------------------------------------------- Game loop

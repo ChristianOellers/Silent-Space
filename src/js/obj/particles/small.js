@@ -13,9 +13,11 @@ function Obj_Particle_Small() {
   this.State = null;
 
   // Assets
-  this.sprite0 = document.getElementById('Asset-Particle-0');
-  this.sprite1 = document.getElementById('Asset-Particle-1');
-  this.sprite2 = document.getElementById('Asset-Particle-2');
+  this.sprites = [
+    document.getElementById('Asset-Particle-0'),
+    document.getElementById('Asset-Particle-1'),
+    document.getElementById('Asset-Particle-2'),
+  ];
 
   // Graphic
   this.canvas = document.getElementById('Particles');
@@ -93,7 +95,7 @@ function Obj_Particle_Small() {
     this.rotation = -1 + Math.random() * 1;
     this.speed = this.speedMin + Math.random() * 1.5;
     this.lifetime = this.lifetimeMin + Math.random() * 2 * this.lifetimeMin;
-    this.spriteVariant = parseInt((Math.random() * 100) % 3, 10);
+    this.spriteVariant = parseInt((Math.random() * 100) % this.sprites.length, 10);
   };
 
   /**
@@ -119,7 +121,7 @@ function Obj_Particle_Small() {
    */
   this.drawUpdate = () => {
     const { ctx } = this;
-    const sprite = this[`sprite${this.spriteVariant}`];
+    const sprite = this.sprites[this.spriteVariant];
 
     this.CanvasHelper.clear(ctx);
     ctx.drawImage(sprite, this.x, this.y);

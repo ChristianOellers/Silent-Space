@@ -12,9 +12,11 @@ function Core_Scene() {
   this.Stage = null;
 
   // DOM
-  this.musicElement1 = document.getElementById('Music-Ambient-Light');
-  this.musicElement2 = document.getElementById('Music-Ambient-Dramatic');
   this.appElement = document.getElementById('App');
+
+  // DOM - Audio
+  this.musicElements = [document.getElementById('Music-Ambient-Light'), document.getElementById('Music-Ambient-Dramatic')];
+  this.musicElement = null; // Randomly chosen
 
   // General
   this.musicVolume = 0.25;
@@ -35,6 +37,7 @@ function Core_Scene() {
     this.Player = Ship_Player;
     this.Stage = Stage;
 
+    this.setMusic();
     this.createBackground();
     this.bind();
   };
@@ -59,6 +62,17 @@ function Core_Scene() {
 
     this.Background.run();
     this.playMusic();
+  };
+
+  /**
+   * Choose random ambient music.
+   *
+   * @private
+   */
+  this.setMusic = () => {
+    const rnd = parseInt((Math.random() * 100) % this.musicElements.length, 10);
+
+    this.musicElement = this.musicElements[rnd];
   };
 
   /**
