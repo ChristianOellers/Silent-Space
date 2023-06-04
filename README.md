@@ -131,6 +131,7 @@ Thanks for all the support, help and creative feedback!
 
 ### Priority
 
+- Add GitHub link (if viewed via Vercel)
 - Update background images to be brighter, nebula, interesting
 - Add win/lose condition and end screen
   - e.g. be hit max. 3x (lifes)
