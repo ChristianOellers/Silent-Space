@@ -111,7 +111,7 @@ function Obj_Weapon_Phaser() {
   /**
    * Graphic animation.
    *
-   * @todo Fix - Move graphic away from ship (rotation is mismatching?)
+   * @todo Fix: Move graphic away from ship (rotation is mismatching?)
    * @private
    */
   this.drawGfx = () => {

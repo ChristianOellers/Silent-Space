@@ -46,7 +46,7 @@ function Core_Ui_Hud() {
   /**
    * Draw a slightly flickering HUD.
    *
-   * @todo Increase intensity temporary during ship being hit.
+   * @todo Improve: Increase intensity temporary during ship being hit.
    * @private
    */
   this.drawUpdate = () => {

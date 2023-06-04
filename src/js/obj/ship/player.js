@@ -104,6 +104,7 @@ function Obj_Ship_Player() {
         this.soundWeapon = document.getElementById('Sound-Weapon-Phaser');
         break;
       default:
+        // eslint-disable-next-line no-console
         console.error(`Unknown 'type' parameter: ${type}`);
         break;
     }
@@ -284,7 +285,7 @@ function Obj_Ship_Player() {
   /**
    * Draw engine particle fire.
    *
-   * @todo Review - Check if spark rendering really works
+   * @todo Review: Check if spark rendering really works
    */
   this.drawEngineFire = (posX, posY) => {
     const sparks = this.engineSparks;
@@ -363,8 +364,8 @@ function Obj_Ship_Player() {
    * - All keys can be pressed simultaneously and repeated times, which allows for smooth movement.
    * - Some keys require special settings to prevent multiple key presses (block the functionality).
    *
-   * @todo    Refactor: Outsource interval closure function.
-   * @param   {Object}  event  Keyboard event.
+   * @todo  Refactor: Outsource interval closure function.
+   * @param {Object}  event  Keyboard event.
    * @private
    */
   this.keyControlDown = (event) => {
@@ -707,7 +708,7 @@ function Obj_Ship_Player() {
     this.State.playerPosition = new this.Ext_Vector2D(this.x, this.y);
 
     /* * /
-    // @todo Check - Speed change seems not useful?
+    // @todo Check: Speed change seems not useful?
     this.speed = Number(this.speed.toFixed(2));
     this.x += this.getPosX() * this.friction;
     this.y += this.getPosY() * this.friction;

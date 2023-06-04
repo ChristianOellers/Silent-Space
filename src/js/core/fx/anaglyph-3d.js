@@ -42,7 +42,7 @@ function Core_Fx_Anaglyph3D() {
   /**
    * Animate effect.
    *
-   * @todo Optimize - Split complex code
+   * @todo Optimize: Split complex code
    * @private
    */
   this.animate = () => {

@@ -48,7 +48,7 @@ function Core_Fx_Displace() {
   /**
    * Animate effect.
    *
-   * @todo Optimize - Split complex code
+   * @todo Optimize: Split complex code
    * @private
    */
   this.animate = () => {

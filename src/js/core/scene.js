@@ -107,7 +107,8 @@ function Core_Scene() {
 
   /**
    * Play music.
-   *c
+   *
+   * @todo Review: Loading music might not be required?
    * @private
    */
   this.playMusic = () => {
@@ -121,7 +122,7 @@ function Core_Scene() {
   /**
    * On displace Fx (player hit with shield).
    *
-   * @todo Refactor - Unfortunate coupling to effect 'dictating' time
+   * @todo Refactor: Unfortunate coupling to effect 'dictating' time
    * @see Core_Fx_Displace
    * @private
    */
