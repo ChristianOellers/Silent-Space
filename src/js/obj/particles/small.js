@@ -33,7 +33,7 @@ function Obj_Particle_Small() {
   this.speedMin = 3; // Min. speed
   this.speedMax = 15; // Max. speed
   this.speed = 0; // Current speed
-  this.lifetimeMin = 50; // Min. lifetime
+  this.lifetimeMin = 75; // Min. lifetime
   this.lifetimeMax = 150; // Max. lifetime
   this.lifetime = 0; // Object lifespan until reset
   this.spriteVariant = 0; // Random choice of existing
@@ -134,6 +134,7 @@ function Obj_Particle_Small() {
    * Update position depending on its velocity.
    * Mark object for removal if it has left the stage.
    *
+   * @todo Decide: Should particles be 'smart' and defy physics, for extra challenge?
    * @todo Fix: Vector math of approaching player is odd
    * @private
    */
@@ -142,6 +143,7 @@ function Obj_Particle_Small() {
     this.y -= this.getPosY() * 1;
     this.lifetime--;
 
+    /* * /
     if (this.State.playerPosition) {
       const screenWidth = this.ctx.canvas.clientWidth;
       const screenHeight = this.ctx.canvas.clientHeight;
@@ -155,6 +157,7 @@ function Obj_Particle_Small() {
       this.x += playerPos.x * 1.25;
       this.y += playerPos.y * 1.25;
     }
+    /* */
 
     // Reset position
     if (this.lifetime <= 0) {

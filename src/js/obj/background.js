@@ -6,8 +6,8 @@
  */
 function Obj_Background() {
   // Graphic
-  this.canvas0 = null; // canvas0 DOM element
-  this.canvas1 = null; // canvas1 DOM element
+  this.canvas0 = null; // canvas0 DOM element (Blurred)
+  this.canvas1 = null; // canvas1 DOM element (Normal)
   this.ctx0 = null; // canvas0 context object
   this.ctx1 = null; // canvas1 context object
 
@@ -101,7 +101,6 @@ function Obj_Background() {
   /**
    * Draw tiles on stage.
    *
-   * @todo Decide: Repurpose background to use as 2nd foreground layer?
    * @private
    */
   this.drawTiles = () => {

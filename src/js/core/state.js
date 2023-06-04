@@ -40,6 +40,9 @@ function Core_State() {
       if (difference) {
         customEvent = new CustomEvent('State-Difficulty');
         window.dispatchEvent(customEvent);
+
+        customEvent = new CustomEvent('Player-Score');
+        window.dispatchEvent(customEvent);
       }
     }, APP_GLOBAL.FPS);
   };

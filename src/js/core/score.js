@@ -1,17 +1,20 @@
 /**
  * Score + Stats.
  *
+ * @todo WIP: Implement scoring to be dynamic, allow negative values.
  * @module
  */
 function Core_Score() {
   // DOM
   this.hitsElement = document.getElementById('Score-Hits');
   this.shotsElement = document.getElementById('Score-Shots');
+  this.scoreElement = document.getElementById('Score-Score');
 
   // Score
   this.score = {
     hits: 0,
     shots: 0,
+    score: 0,
   };
 
   /**
@@ -31,6 +34,7 @@ function Core_Score() {
   this.bind = () => {
     window.addEventListener('Player-Hit', this.onPlayerHit.bind(this));
     window.addEventListener('Player-Shot', this.onPlayerShot.bind(this));
+    window.addEventListener('Player-Score', this.onPlayerScore.bind(this));
   };
 
   /**
@@ -50,6 +54,7 @@ function Core_Score() {
   this.render = () => {
     this.hitsElement.innerHTML = this.score.hits;
     this.shotsElement.innerHTML = this.score.shots;
+    this.scoreElement.innerHTML = this.score.score;
   };
 
   /**
@@ -69,6 +74,16 @@ function Core_Score() {
    */
   this.onPlayerShot = (_event) => {
     this.update('shots');
+    this.render();
+  };
+
+  /**
+   * On player score.
+   *
+   * @private
+   */
+  this.onPlayerScore = (_event) => {
+    this.update('score');
     this.render();
   };
 }

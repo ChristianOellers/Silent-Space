@@ -1,16 +1,18 @@
 .details {
+  background: rgba(0, 0, 0, 0.05);
   display: flex;
   flex-flow: row;
   justify-content: space-between;
   align-items: flex-start;
   width: var(--sg-app-width);
   box-sizing: border-box;
-  margin: 0 auto;
+  margin: 1rem auto 0;
   padding: 1rem 2.5rem;
 
   /* Workaround to avoid invisible/blurry content */
   z-index: 1;
   transform: scale(1);
+  backdrop-filter: blur(1rem);
 }
 
 .details .col {
