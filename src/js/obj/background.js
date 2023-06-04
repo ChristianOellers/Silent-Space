@@ -27,6 +27,7 @@ function Obj_Background() {
   this.maxHeight = 500; // Level height, e.g. canvas0.height | fixed value
   this.scrollSpeed0 = 6 * 1.0; // How fast the level will scroll in px
   this.scrollSpeed1 = 3 * 0.5; // How fast the level will scroll in px
+  this.scrollSpeedFactor = 1;
 
   // Internal
   this.Queue0 = []; // Current animation queue with a few required tiles
@@ -222,7 +223,7 @@ function Obj_Background() {
   this.moveTiles = () => {
     // eslint-disable-next-line no-restricted-syntax, guard-for-in
     for (const obj in this.Queue0) {
-      this.Queue0[obj].posY += this.scrollSpeed0;
+      this.Queue0[obj].posY += this.scrollSpeed0 * this.scrollSpeedFactor;
       this.Queue1[obj].posY += this.scrollSpeed1;
     }
   };

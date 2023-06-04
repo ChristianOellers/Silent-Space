@@ -7,6 +7,7 @@
  */
 function Obj_Ship_Player() {
   // Dependencies
+  this.Background = null;
   this.Ext_Vector2D = null;
   this.FxAnaglyph3D = null;
   this.FxDisplace = null;
@@ -56,7 +57,7 @@ function Obj_Ship_Player() {
   this.weaponCooldown = false; // Flag (automatic)
 
   // Engine
-  this.engineSparksMax = (20 + Math.random() * 10) | 0;
+  this.engineSparksMax = 50;
   this.engineSparks = [];
 
   // Internals
@@ -73,6 +74,7 @@ function Obj_Ship_Player() {
    * Init, set events and audio.
    */
   this.init = () => {
+    this.Background = Background;
     this.Ext_Vector2D = Ext_Vector2D;
     this.FxAnaglyph3D = FxAnaglyph3D;
     this.FxDisplace = FxDisplace;
@@ -156,6 +158,9 @@ function Obj_Ship_Player() {
       window.dispatchEvent(customEvent);
 
       customEvent = new CustomEvent('Player-Hit', { detail: true });
+      window.dispatchEvent(customEvent);
+
+      customEvent = new CustomEvent('Player-Score', { detail: true });
       window.dispatchEvent(customEvent);
 
       // Reset state
@@ -295,7 +300,7 @@ function Obj_Ship_Player() {
     const sparksToRender = renderMaxSparks | 0;
 
     if (!sparks.length) {
-      for (i = 0; i <= sparksToRender; i++) {
+      for (i = 0; i <= this.engineSparksMax; i++) {
         obj = {};
         obj.lifetime = Math.round(50 + Math.random() * 50);
         obj.size = 1 + 2 * Math.random();
@@ -640,6 +645,8 @@ function Obj_Ship_Player() {
 
     this.velocityY -= acc;
     this.speed += acc;
+
+    this.setBackgroundSpeed();
   };
 
   /**
@@ -650,6 +657,8 @@ function Obj_Ship_Player() {
 
     this.velocityY += acc;
     this.speed -= acc;
+
+    this.setBackgroundSpeed();
   };
 
   // -------------------------------------------------------------------------------------- Rotate
@@ -757,5 +766,18 @@ function Obj_Ship_Player() {
       this.y = 0;
       this.velocityY = -vy;
     }
+  };
+
+  // ------------------------------------------------------------------------------------------------------ Background
+
+  /**
+   * Set background speed (factor).
+   * Allow to speed up animation in clamped range, that must not be exceeded.
+   */
+  this.setBackgroundSpeed = () => {
+    const maxFactor = 2;
+
+    this.Background.scrollSpeedFactor =
+      this.speed > 1 && this.speed <= maxFactor ? this.speed : Math.min(Math.max(this.speed, 1), maxFactor);
   };
 }

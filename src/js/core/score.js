@@ -1,6 +1,7 @@
 /**
  * Score + Stats.
  *
+ * @todo Refactor: Duplicate code can be optimized.
  * @todo WIP: Implement scoring to be dynamic, allow negative values.
  * @module
  */
@@ -11,10 +12,11 @@ function Core_Score() {
   this.scoreElement = document.getElementById('Score-Score');
 
   // Score
+  // - Score '-10' cheats around immediate start trigger
   this.score = {
-    hits: 0,
-    shots: 0,
-    score: 0,
+    hits: 0, // Space debris (losses)
+    shots: 0, // Shots (explosions) - No effect
+    score: -10, // Time survived vs. losses
   };
 
   /**
@@ -38,15 +40,6 @@ function Core_Score() {
   };
 
   /**
-   * Update score by type.
-   *
-   * @private
-   */
-  this.update = (type) => {
-    this.score[type]++;
-  };
-
-  /**
    * Render view.
    *
    * @private
@@ -63,7 +56,7 @@ function Core_Score() {
    * @private
    */
   this.onPlayerHit = (_event) => {
-    this.update('hits');
+    this.score.hits++;
     this.render();
   };
 
@@ -73,17 +66,25 @@ function Core_Score() {
    * @private
    */
   this.onPlayerShot = (_event) => {
-    this.update('shots');
+    this.score.shots++;
     this.render();
   };
 
   /**
    * On player score.
+   * - Grant +10 for good actions
+   * - Grant -50 (or more) for bad actions
    *
    * @private
    */
-  this.onPlayerScore = (_event) => {
-    this.update('score');
+  this.onPlayerScore = (event) => {
+    let score = 10;
+
+    if (event.detail) {
+      score = -(50 * this.score.hits);
+    }
+
+    this.score.score += score;
     this.render();
   };
 }
