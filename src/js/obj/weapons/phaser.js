@@ -1,26 +1,25 @@
 /**
- * Weapon type - Laser.
+ * Weapon type - Phaser.
  *
- * @todo Replace math by library functions.
- * @todo  Outsource sound.
+ * @todo Improve: Randomize explosion audio?
+ * @todo Refactor: Replace math by library functions.
+ * @todo Refactor: Outsource sound.
  * @module
  */
-function Obj_Weapon_Laser() {
+function Obj_Weapon_Phaser() {
   // Dependencies
   this.CanvasHelper = null;
+  this.MathHelper = null;
 
   // Assets
-  this.audio = document.getElementById('Sound-Explosions-Laser');
-  this.sprite = document.getElementById('Asset-Weapon-Laser');
+  this.audio = document.getElementById('Sound-Explosions-1');
+  this.sprite = document.getElementById('Asset-Weapon-Beam');
 
   // Graphic
   this.canvas = document.getElementById('Weapons');
   this.ctx = this.canvas.getContext('2d');
-  this.width = 8; // Sprite width in px
-  this.height = 25; // Sprite height in px
-
-  // Sound
-  this.audio.volume = 1;
+  this.width = 20; // Graphic size, px
+  this.height = 2; // Graphic size, px
 
   // Weapon
   this.originX = 0; // Initial X coordinate
@@ -28,10 +27,13 @@ function Obj_Weapon_Laser() {
   this.originRotation = 0; // Initial object rotation (degrees)
   this.x = 0; // Current position (x)
   this.y = 0; // Current position (y)
-  this.speed = 10; // Current speed
-  this.acceleration = 0.3; // Acceleration factor
+  this.speed = 30; // Current speed
+  this.acceleration = 0.5; // Acceleration factor
   this.rotation = 0; // Current rotation
-  this.hitChance = 50; // Percentage
+  this.lifespan = 60; // How long weapon can be active
+  this.lifetime = 0; // Increases until lifespan is reached; then 'isDead = true'
+  this.beamLength = 18; // Size (cheat: Stick out of screen)
+  this.hitChance = 80; // Percentage
 
   // Internals
   this.isUpdating = false; // Prevent parallel updates of the game
@@ -46,6 +48,7 @@ function Obj_Weapon_Laser() {
    */
   this.init = () => {
     this.CanvasHelper = CanvasHelper;
+    this.MathHelper = MathHelper;
   };
 
   /**
@@ -57,9 +60,9 @@ function Obj_Weapon_Laser() {
    * @private
    */
   this.run = (x, y, rotation) => {
-    this.originX = x - this.width / 2;
-    this.originY = y;
-    this.originRotation = rotation;
+    this.originX = 119 + x - this.width / 2;
+    this.originY = 145 + y;
+    this.originRotation = 270 + rotation;
   };
 
   // ------------------------------------------------------------------------------------------------------- Game loop
@@ -71,6 +74,11 @@ function Obj_Weapon_Laser() {
    */
   this.loop = () => {
     if (this.isUpdating) {
+      return;
+    }
+
+    if (this.remove) {
+      this.CanvasHelper.clear(this.ctx);
       return;
     }
 
@@ -92,11 +100,77 @@ function Obj_Weapon_Laser() {
 
     this.CanvasHelper.clear(ctx);
 
+    ctx.save();
     this.drawRotation();
-    ctx.drawImage(this.sprite, this.x, this.y);
+    this.drawGfx();
     ctx.restore();
 
     this.isUpdating = false;
+  };
+  
+  /**
+   * Graphic animation.
+   *
+   * @todo Fix - Move graphic away from ship (rotation is mismatching?)
+   * @private
+   */
+  this.drawGfx = () => {
+    const { ctx, x, y, width, height, lifetime, lifespan } = this;
+
+    let percent = (lifetime / lifespan);
+    let widthScale = this.beamLength * width + (width / 2 * percent) / 2;
+
+    ctx.fillStyle = 'rgba(245, 0, 245, 0.2)';
+    ctx.fillRect(50, -4, -50 + widthScale * 1.05, height * 5);
+    ctx.fillStyle = 'rgba(240, 0, 240, 0.3)';
+    ctx.fillRect(100, -3, -100 + widthScale * 1.15, height * 4);
+    ctx.fillStyle = 'rgba(235, 0, 235, 0.4)';
+    ctx.fillRect(150, -2, -150 + widthScale * 1.25, height * 3);
+    ctx.fillStyle = 'rgba(230, 0, 230, 0.5)';
+    ctx.fillRect(200, -1, -200 + widthScale * 1.35, height * 2);
+
+    ctx.fillStyle = this.getGfxFill();
+    ctx.fillRect(0, 0, widthScale, height);
+  };
+
+  /**
+   * Fill color animation.
+   *
+   * @private
+   */
+  this.getGfxFill = () => {
+    const { ctx, width, lifetime, lifespan } = this;
+
+    const alpha = this.getGfxAlpha();
+
+    let gradient = ctx.createLinearGradient(0, 0, width, 0);
+    let percent = (lifetime / lifespan);
+    let alphaBack = (alpha / 2) * (percent * 25);
+
+    const color0 = 'rgba(192, 0, 255, ' + alpha / alphaBack + ')';
+    const color1 = 'rgba(255, 0, 192, ' + alpha + ')';
+
+    gradient.addColorStop(0, color0);
+    gradient.addColorStop(1, color1);
+
+    return gradient;
+  };
+  
+  /**
+   * Alpha value animation.
+   *
+   * 1) Fade from 1 to zero over full lifetime.
+   *
+   * @see https://www.geogebra.org/classic/agmchckr
+   * @private
+   */
+  this.getGfxAlpha = () => {
+    const { lifetime, lifespan } = this;
+
+    // 1)
+    const alpha = Math.cos(lifetime / (lifespan / Math.PI)) * 0.5 + 1;
+
+    return (alpha > 1) ? 1 : alpha;
   };
 
   /**
@@ -109,7 +183,6 @@ function Obj_Weapon_Laser() {
     const degree = this.originRotation;
     const radian = degree * (Math.PI / 180);
 
-    ctx.save();
     ctx.translate(this.originX, this.originY);
     ctx.rotate(radian);
   };
@@ -124,10 +197,6 @@ function Obj_Weapon_Laser() {
     const rand = Math.round(Math.random() * 100);
     const hitChance = (Math.random() * this.hitChance) | 0;
     let customEvent;
-
-    if (this.remove) {
-      return;
-    }
 
     this.remove = true;
 
@@ -154,9 +223,10 @@ function Obj_Weapon_Laser() {
     this.x += this.getPosX() * 1;
     this.y += this.getPosY() * 1;
     this.speed += this.acceleration;
+    this.lifetime += this.speed * 0.1;
 
-    // Remove from stage (arbitrary value)
-    if (this.y < -250) {
+    // Remove from stage
+    if (this.lifetime >= this.lifespan) {
       this.destroySelf();
     }
   };
@@ -170,10 +240,7 @@ function Obj_Weapon_Laser() {
    * @private
    */
   this.getPosX = () => {
-    const rad = this.rotation * (Math.PI / 180);
-    const pos = Math.sin(rad) * this.speed;
-
-    return pos;
+    return this.MathHelper.getPosX(this.rotation, this.speed);
   };
 
   /**
@@ -183,9 +250,7 @@ function Obj_Weapon_Laser() {
    * @private
    */
   this.getPosY = () => {
-    const rad = this.rotation * (Math.PI / 180);
-    const pos = Math.cos(rad) * this.speed * -1;
-
-    return pos;
+    return this.MathHelper.getPosY(this.rotation, this.speed);
   };
 }
+

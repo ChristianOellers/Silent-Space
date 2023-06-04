@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>2D Space Shooter – Concept</title>
-    <meta name="description" content="Conceptual game engine" />
+    <title>2D Space Shooter – Concept + Tech demo</title>
+    <meta name="description" content="Conceptual 2D Canvas Vanilla JS game engine" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=MuseoModerno:wght@400;600" />
@@ -35,16 +35,19 @@
     <section class="details">
       <div class="col">
         <p class="text">
-          Keys: Arrows = Move, C = Shield, F = Fire <br />
-          Active shield disallows firing weapon
+          Arrows = Move, C = Shield, F = Fire
+        </p>
+        <p class="text" title="Space debris | Fired shots that hit (something ;)">
+          Debris: <span id="Score-Hits">0</span><br>
+          Hits: <span id="Score-Shots">0</span>
         </p>
       </div>
-      <div class="col">
-        <p class="text">
-          Hits: <span id="Score-Hits">0</span><br />
-          Shots: <span id="Score-Shots">0</span>
-        </p>
-      </div>
+      <p class="text">
+        Enjoy the musical and visual ambiente. Shoot the guns for some effects, 
+        and play around with being hit by particles with or without shields.
+        Reload the app for randomized background designs.
+        Hint: There's no goal or enemies in this game. This is a tech demo.
+      </p>
     </section>
 
     <!-- Assets -->
@@ -64,38 +67,43 @@
       <img id="Tile-1-4" src="assets/images/foreground/4.png" />
       <img id="Tile-1-5" src="assets/images/foreground/5.png" />
       <img id="Tile-1-6" src="assets/images/foreground/6.png" />
+      <img id="Tile-1-7" src="assets/images/foreground/7.png" />
+      <img id="Tile-1-8" src="assets/images/foreground/8.png" />
+      <img id="Tile-1-9" src="assets/images/foreground/9.png" />
 
       <!-- Objects -->
-      <img id="Asset-Particle-Large" src="assets/images/objects/particles/large.png" />
-      <img id="Asset-Particle-Small" src="assets/images/objects/particles/small.png" />
+      <img id="Asset-Particle-0" src="assets/images/objects/particles/0.png" />
+      <img id="Asset-Particle-1" src="assets/images/objects/particles/1.png" />
+      <img id="Asset-Particle-2" src="assets/images/objects/particles/2.png" />
       <img id="Asset-Ship-Damaged" src="assets/images/objects/ship/damaged.png" />
-      <img id="Asset-Ship-Default" src="assets/images/objects/ship/default.png" />
-      <img id="Asset-Ship-Shielded" src="assets/images/objects/ship/shielded.png" />
-      <img id="Asset-Ship-Shielded-Hit" src="assets/images/objects/ship/shielded-hit.png" />
+      <img id="Asset-Ship-Damaged-Shielded" src="assets/images/objects/ship/damaged-shielded.png" />
+      <img id="Asset-Ship-Healthy" src="assets/images/objects/ship/healthy.png" />
+      <img id="Asset-Ship-Healthy-Shielded" src="assets/images/objects/ship/healthy-shielded.png" />
       <img id="Asset-Weapon-Beam" src="assets/images/objects/weapons/beam.png" />
-      <img id="Asset-Weapon-Laser" src="assets/images/objects/weapons/laser.png" />
 
       <!-- HUD -->
       <img id="Asset-Hud-Ship" src="assets/images/hud/ship.png" />
 
-      <!-- Music -->
-      <audio id="Music-Ambient" preload autobuffer>
+      <!-- Music / Loops -->
+      <audio preload autobuffer loop id="Music-Ambient">
         <source src="assets/music/space-ambient.ogg" type="audio/ogg" />
         <source src="assets/music/space-ambient.wav" type="audio/wav" />
       </audio>
 
-      <!-- Sounds -->
-      <audio preload autobuffer id="Sound-Engine-Thruster">
+      <!-- Sounds / Loops -->
+      <audio preload autobuffer loop id="Sound-Engine-Thruster">
         <source src="assets/sounds/engine/thruster.ogg" type="audio/ogg" />
         <source src="assets/sounds/engine/thruster.wav" type="audio/wav" />
       </audio>
-      <audio preload autobuffer id="Sound-Explosions-Beam">
-        <source src="assets/sounds/explosions/beam.ogg" type="audio/ogg" />
-        <source src="assets/sounds/explosions/beam.wav" type="audio/wav" />
+
+      <!-- Sounds / Fx -->
+      <audio preload autobuffer id="Sound-Explosions-0">
+        <source src="assets/sounds/explosions/0.ogg" type="audio/ogg" />
+        <source src="assets/sounds/explosions/0.wav" type="audio/wav" />
       </audio>
-      <audio preload autobuffer id="Sound-Explosions-Laser">
-        <source src="assets/sounds/explosions/laser.ogg" type="audio/ogg" />
-        <source src="assets/sounds/explosions/laser.wav" type="audio/wav" />
+      <audio preload autobuffer id="Sound-Explosions-1">
+        <source src="assets/sounds/explosions/1.ogg" type="audio/ogg" />
+        <source src="assets/sounds/explosions/1.wav" type="audio/wav" />
       </audio>
       <audio preload autobuffer id="Sound-Shield-Enabled">
         <source src="assets/sounds/shield/enabled.ogg" type="audio/ogg" />
@@ -109,9 +117,9 @@
         <source src="assets/sounds/weapons/beam.ogg" type="audio/ogg" />
         <source src="assets/sounds/weapons/beam.wav" type="audio/wav" />
       </audio>
-      <audio preload autobuffer id="Sound-Weapon-Laser">
-        <source src="assets/sounds/weapons/laser.ogg" type="audio/ogg" />
-        <source src="assets/sounds/weapons/laser.wav" type="audio/wav" />
+      <audio preload autobuffer id="Sound-Weapon-Phaser">
+        <source src="assets/sounds/weapons/phaser.ogg" type="audio/ogg" />
+        <source src="assets/sounds/weapons/phaser.wav" type="audio/wav" />
       </audio>
     </div>
 
@@ -133,6 +141,11 @@
           </feComponentTransfer>
           <feBlend in="leftRed" in2="rightCyan" mode="screen" />
         </filter>
+        <filter id="Fx-Displace" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+          <feOffset dx="0" dy="0" result="offset" in="SourceGraphic" />
+          <feTurbulence baseFrequency="0.13" numOctaves="1" result="turbulence" type="turbulence" />
+          <feDisplacementMap scale="16" in="offset" in2="turbulence" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
       </defs>
     </svg>
 
@@ -142,10 +155,12 @@
     <!-- Libraries -->
     <script defer src="js/lib/canvas.js"></script>
     <script defer src="js/lib/math.js"></script>
+    <script defer src="js/lib/math-vector.js"></script>
     <script defer src="js/lib/web/key-controls.js"></script>
 
     <!-- Core -->
     <script defer src="js/core/fx/anaglyph-3d.js"></script>
+    <script defer src="js/core/fx/displace.js"></script>
     <script defer src="js/core/fx/shake.js"></script>
     <script defer src="js/core/ui/hud.js"></script>
     <script defer src="js/core/ui/menu.js"></script>
@@ -157,10 +172,9 @@
 
     <!-- Objects -->
     <script defer src="js/obj/particles/small.js"></script>
-    <script defer src="js/obj/particles/large.js"></script>
     <script defer src="js/obj/ship/player.js"></script>
     <script defer src="js/obj/weapons/beam.js"></script>
-    <script defer src="js/obj/weapons/laser.js"></script>
+    <script defer src="js/obj/weapons/phaser.js"></script>
     <script defer src="js/obj/background.js"></script>
 
     <!-- Init + Run -->

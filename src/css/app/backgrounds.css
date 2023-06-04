@@ -2,6 +2,10 @@
  * Images are randomly chosen in JS.
  */
 
+#Weapons {
+  mix-blend-mode: lighten;
+}
+
 .static-image {
   animation: backgroundMove 300s;
   animation-timing-function: ease-in-out;

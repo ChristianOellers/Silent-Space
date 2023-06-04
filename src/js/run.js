@@ -10,6 +10,7 @@ window.onload = () => {
     FxShake.init();
     Loop.init();
     Score.init();
+    State.init();
     UiHud.init();
 
     Loop.run();

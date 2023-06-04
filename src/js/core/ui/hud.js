@@ -1,6 +1,7 @@
 /**
  * Ingame HUD.
  *
+ * @todo Improve: Decouple player event from HUD.
  * @module
  */
 function Core_Ui_Hud() {

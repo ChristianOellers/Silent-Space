@@ -37,8 +37,8 @@
     top: 0;
   }
   5% {
-    left: -1px;
-    top: -1px;
+    left: -2px;
+    top: -2px;
   }
   10% {
     left: -1px;
@@ -50,7 +50,7 @@
   }
   20% {
     left: 1px;
-    top: 1px;
+    top: 2px;
   }
   25% {
     left: 1px;
@@ -66,7 +66,7 @@
   }
   40% {
     left: 1px;
-    top: -1px;
+    top: -2px;
   }
   45% {
     left: -1px;
@@ -82,7 +82,7 @@
   }
   60% {
     left: 0;
-    top: 0;
+    top: 1px;
   }
   65% {
     left: 1px;
@@ -90,7 +90,7 @@
   }
   70% {
     left: -1px;
-    top: 1px;
+    top: 2px;
   }
   75% {
     left: 0;

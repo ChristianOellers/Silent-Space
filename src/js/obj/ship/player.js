@@ -1,20 +1,26 @@
 /**
  * Player object: The space ship.
  *
- * @todo Outsource particles, shield, sound.
- * @todo Replace math by library functions.
+ * @todo Refactor: Outsource particles, shield, sound.
+ * @todo Refactor: Replace math by library functions.
  * @module
  */
 function Obj_Ship_Player() {
   // Dependencies
+  this.Ext_Vector2D = null;
   this.FxAnaglyph3D = null;
+  this.FxDisplace = null;
+  this.MathHelper = null;
   this.WeaponType = null;
+  this.State = null;
 
   // Assets
-  this.sprite = document.getElementById('Asset-Ship-Default');
   this.spriteDamaged = document.getElementById('Asset-Ship-Damaged');
-  this.spriteShielded = document.getElementById('Asset-Ship-Shielded');
-  this.spriteShieldedHit = document.getElementById('Asset-Ship-Shielded-Hit');
+  this.spriteDamagedShielded = document.getElementById('Asset-Ship-Damaged-Shielded');
+  this.spriteHealthy = document.getElementById('Asset-Ship-Healthy');
+  this.spriteHealthyShielded = document.getElementById('Asset-Ship-Healthy-Shielded');
+  
+  // Assets - Sounds
   this.soundShieldEnabled = document.getElementById('Sound-Shield-Enabled');
   this.soundUiFunctionBlocked = document.getElementById('Sound-Ui-Function-Blocked');
   this.soundEngineThruster = document.getElementById('Sound-Engine-Thruster');
@@ -25,17 +31,17 @@ function Obj_Ship_Player() {
   this.ctx = this.canvas.getContext('2d');
 
   // Ship
-  this.x = 0; // Current position (x).
-  this.y = 0; // Current position (y).
-  this.friction = 0.93; // World friction: Close to 1 values create smooth surfaces.
-  this.velocityX = 0; // Horizontal velocity.
-  this.velocityY = 0; // Vertical velocity.
-  this.rotation = 0; // Current rotation.
-  this.rotationRadius = 5; // How fast the ship can rotate in degrees/frame.
-  this.speed = 0; // Current speed.
-  this.speedMax = 5 + Math.random() * 3; // Maximum speed.
-  this.acceleration = 0.3 + Math.random() * 0.25; // Speed +/- acceleration factor.
-  this.movingDirection = ''; // up, down, left, right
+  this.x = 0; // Current position (x)
+  this.y = 0; // Current position (y)
+  this.friction = 0.93; // World friction: Close to 1 values create smooth surfaces
+  this.velocityX = 0; // Horizontal velocity
+  this.velocityY = 0; // Vertical velocity
+  this.rotation = 0; // Current rotation
+  this.rotationRadius = 5; // How fast the ship can rotate in degrees/frame
+  this.speed = 0; // Current speed
+  this.speedMax = 5 + Math.random() * 3; // Maximum speed
+  this.acceleration = 0.3 + Math.random() * 0.25; // Speed +/- acceleration factor
+  this.movingDirection = ''; // Values: up, down, left, right
 
   // Health
   this.isDamaged = false;
@@ -46,16 +52,20 @@ function Obj_Ship_Player() {
   this.shieldActive = false; // Flag (automatic)
 
   // Weapon
-  this.weaponCooldownTime = (1500 + Math.random() * 500) | 0; // Time in MS it takes until you can fire again.
+  this.weaponCooldownTime = (1000 + Math.random() * 500) | 0; // Time in MS it takes until you can fire again.
   this.weaponCooldown = false; // Flag (automatic)
 
   // Engine
-  this.engineSparksMax = (20 + Math.random() * 100) | 0;
+  this.engineSparksMax = (20 + Math.random() * 10) | 0;
   this.engineSparks = [];
 
   // Internals
   this.isBeingHit = false;
   this.isUpdating = false;
+  
+  // DEV + DEBUG
+  // Keep empty to randome
+  this.overrideWeapon = ''; // beam phaser
 
   // ------------------------------------------------------------------------------------------------------------ Init
 
@@ -63,9 +73,15 @@ function Obj_Ship_Player() {
    * Init, set events and audio.
    */
   this.init = () => {
+    this.Ext_Vector2D = Ext_Vector2D;
     this.FxAnaglyph3D = FxAnaglyph3D;
+    this.FxDisplace = FxDisplace;
+    this.MathHelper = MathHelper;
+    this.State = State;
+    
+    this.soundUiFunctionBlocked.volume = 0.1;
 
-    this.setWeapon('laser');
+    this.setWeapon(this.getRandomWeapon());
     this.drawInit();
     this.controlInit();
     this.playSound();
@@ -78,12 +94,18 @@ function Obj_Ship_Player() {
    * Set player weapon.
    */
   this.setWeapon = (type) => {
-    if (type === 'laser') {
-      this.WeaponType = Obj_Weapon_Laser;
-      this.soundWeapon = document.getElementById('Sound-Weapon-Laser');
-    } else if (type === 'beam') {
-      this.WeaponType = Obj_Weapon_Beam;
-      this.soundWeapon = document.getElementById('Sound-Weapon-Beam');
+    switch (type) {
+      case 'beam':
+        this.WeaponType = Obj_Weapon_Beam;
+        this.soundWeapon = document.getElementById('Sound-Weapon-Beam');
+        break;
+      case 'phaser':
+        this.WeaponType = Obj_Weapon_Phaser;
+        this.soundWeapon = document.getElementById('Sound-Weapon-Phaser');
+        break;
+      default:
+        console.error(`Unknown 'type' parameter: ${type}`);
+        break;
     }
   };
 
@@ -111,12 +133,18 @@ function Obj_Ship_Player() {
     const isInRangeY = Math.abs(y - this.y) <= 50;
 
     if (isInRangeX && isInRangeY) {
-      this.FxAnaglyph3D.run();
-
-      // Hit's don't count with defense enabled
+      // Hit's don't count with defense enabled,
+      // but the shield will be disabled.
       if (this.shieldActive) {
+        this.FxDisplace.run();
+        this.hardResetShield();
+
+        customEvent = new CustomEvent('Fx-Displace');
+        window.dispatchEvent(customEvent);
         return;
       }
+
+      this.FxAnaglyph3D.run();
 
       this.isBeingHit = true;
       this.isDamaged = true;
@@ -138,12 +166,44 @@ function Obj_Ship_Player() {
 
   /**
    * React to player shot.
+   *
+   * Switch weapon (just for demo purposes).
    */
   this.onPlayerShot = (_event) => {
-    const weapon = Math.random() > 0.5 ? 'laser' : 'beam';
+    const weapon = this.getRandomWeapon();
 
     this.setWeapon(weapon);
+    
+    // DEV + DEBUG
+    if (this.overrideWeapon) {
+      this.setWeapon(this.overrideWeapon);
+    }
   };
+
+  /**
+   * Get random weapon type.
+   *
+   * @todo Refactor: Change to polymorphic structure.
+   */
+  this.getRandomWeapon = () => {
+    const rnd = parseInt((Math.random() * 100) % 3);
+    let weapon = '';
+    
+    switch (rnd) {
+      case 0:
+        weapon = 'beam';
+        break;
+      case 1:
+        weapon = 'phaser';
+        break;
+      default:
+        weapon = 'laser';
+        break;
+    }
+
+    return weapon;
+  };
+
 
   // ------------------------------------------------------------------------------------------------------- Game loop
 
@@ -180,7 +240,7 @@ function Obj_Ship_Player() {
 
     ctx.filter = 'sharpen';
 
-    ctx.drawImage(this.sprite, this.x, this.y);
+    ctx.drawImage(this.spriteHealthy, this.x, this.y);
   };
 
   /**
@@ -188,7 +248,7 @@ function Obj_Ship_Player() {
    */
   this.drawUpdate = () => {
     const { ctx } = this;
-    let { sprite } = this;
+    let sprite = this.spriteHealthy;
 
     CanvasHelper.clear(this.ctx);
 
@@ -197,10 +257,10 @@ function Obj_Ship_Player() {
     ctx.translate(this.x, this.y);
 
     if (this.shieldActive) {
-      sprite = this.spriteShielded;
+      sprite = this.spriteHealthyShielded;
 
       if (this.isDamaged) {
-        sprite = this.spriteShieldedHit;
+        sprite = this.spriteDamagedShielded;
       }
 
       ctx.drawImage(sprite, -(sprite.width / 2), -(sprite.height / 2));
@@ -224,6 +284,8 @@ function Obj_Ship_Player() {
 
   /**
    * Draw engine particle fire.
+   *
+   * @todo Review - Check if spark rendering really works
    */
   this.drawEngineFire = (posX, posY) => {
     const sparks = this.engineSparks;
@@ -237,10 +299,10 @@ function Obj_Ship_Player() {
     let renderMaxSparks = this.engineSparksMax / 4;
 
     if (this.movingDirection === 'up') {
-      renderMaxSparks = this.engineSparksMax / 2;
+      renderMaxSparks = this.engineSparksMax;
     }
 
-    const sparksToRender = renderMaxSparks;
+    const sparksToRender = renderMaxSparks | 0;
 
     if (!sparks.length) {
       for (i = 0; i <= sparksToRender; i++) {
@@ -302,7 +364,7 @@ function Obj_Ship_Player() {
    * - All keys can be pressed simultaneously and repeated times, which allows for smooth movement.
    * - Some keys require special settings to prevent multiple key presses (block the functionality).
    *
-   * @todo    Outsource interval closure function.
+   * @todo    Refactor: Outsource interval closure function.
    * @param   {Object}  event  Keyboard event.
    * @private
    */
@@ -328,7 +390,8 @@ function Obj_Ship_Player() {
     }
 
     keyInterval = setInterval(() => {
-      // @todo Find a way to allow permanent fire as optional mode (it's also attached to audio and visuals)
+      // @todo Feature: Find a way to allow permanent fire as optional mode.
+      // - Note: It's also attached to audio and visuals.
       const allowPermanentFire = false;
       let direction = '';
 
@@ -343,8 +406,6 @@ function Obj_Ship_Player() {
         } else {
           // Weapon trigger blocked
           const sound = this.soundUiFunctionBlocked;
-
-          sound.volume = 0.2;
           sound.play();
         }
       }
@@ -366,7 +427,7 @@ function Obj_Ship_Player() {
         this.moveUp();
 
         this.movingDirection = 'up';
-        this.soundEngineThruster.volume = 0.06;
+        this.soundEngineThruster.volume = 0.05;
       } else if (keys[115] || keys[83] || keys[40]) {
         direction = 's';
 
@@ -374,7 +435,7 @@ function Obj_Ship_Player() {
         this.moveDown();
 
         this.movingDirection = 'down';
-        this.soundEngineThruster.volume = 0.04;
+        this.soundEngineThruster.volume = 0.03;
       }
 
       // Concat west or east
@@ -386,7 +447,7 @@ function Obj_Ship_Player() {
         // this.rotateLeft();
 
         this.movingDirection = 'left';
-        this.soundEngineThruster.volume = 0.05;
+        this.soundEngineThruster.volume = 0.04;
       } else if (keys[100] || keys[68] || keys[39]) {
         direction += 'e';
 
@@ -395,7 +456,7 @@ function Obj_Ship_Player() {
         this.moveRight();
 
         this.movingDirection = 'right';
-        this.soundEngineThruster.volume = 0.05;
+        this.soundEngineThruster.volume = 0.04;
       }
 
       // keyCallback(direction);
@@ -437,6 +498,7 @@ function Obj_Ship_Player() {
       // Reset FX for next animation
       FxShake.reset();
 
+      this.soundWeapon.volume = 0.5;
       this.soundWeapon.play();
 
       const Weapon = new this.WeaponType();
@@ -451,7 +513,6 @@ function Obj_Ship_Player() {
       window.setTimeout(this.fireWeaponCooldown.bind(this), this.weaponCooldownTime);
     } else {
       // Weapon trigger blocked
-      sound.volume = 0.2;
       sound.play();
     }
   };
@@ -499,7 +560,6 @@ function Obj_Ship_Player() {
       window.dispatchEvent(customEvent);
     } else {
       audioShield = this.soundUiFunctionBlocked;
-      audioShield.volume = 0.3;
       audioShield.play();
     }
   };
@@ -511,6 +571,16 @@ function Obj_Ship_Player() {
    * @private
    */
   this.shieldSwitchCooldown = () => {
+    this.shieldCooldown = false;
+  };
+
+  /**
+   * Shield can become inactive immediately.
+   *
+   * @private
+   */
+  this.hardResetShield = () => {
+    this.shieldActive = false;
     this.shieldCooldown = false;
   };
 
@@ -558,7 +628,7 @@ function Obj_Ship_Player() {
    * @private
    */
   this.moveLeft = () => {
-    this.velocityX -= this.acceleration;
+    this.velocityX -= this.acceleration * 1.25;
   };
 
   /**
@@ -567,7 +637,7 @@ function Obj_Ship_Player() {
    * @private
    */
   this.moveRight = () => {
-    this.velocityX += this.acceleration;
+    this.velocityX += this.acceleration * 1.25;
   };
 
   /**
@@ -634,8 +704,11 @@ function Obj_Ship_Player() {
   this.setPosition = () => {
     this.x += this.velocityX;
     this.y += this.velocityY;
+    
+    this.State.playerPosition = new this.Ext_Vector2D(this.x, this.y);
 
     /* * /
+    // @todo Check - Speed change seems not useful?
     this.speed = Number(this.speed.toFixed(2));
     this.x += this.getPosX() * this.friction;
     this.y += this.getPosY() * this.friction;
@@ -649,10 +722,7 @@ function Obj_Ship_Player() {
    * @private
    */
   this.getPosX = () => {
-    const radian = this.rotation * (Math.PI / 180);
-    const pos = Math.sin(radian) * this.speed;
-
-    return pos;
+    return this.MathHelper.getPosX(this.rotation, this.speed);
   };
 
   /**
@@ -662,10 +732,7 @@ function Obj_Ship_Player() {
    * @private
    */
   this.getPosY = () => {
-    const radian = this.rotation * (Math.PI / 180);
-    const pos = Math.cos(radian) * this.speed * -1;
-
-    return pos;
+    return this.MathHelper.getPosY(this.rotation, this.speed);
   };
 
   // ---------------------------------------------------------------------------------------------------------- Bounds
@@ -673,7 +740,7 @@ function Obj_Ship_Player() {
   /**
    * Bounce off boundaries.
    *
-   * @todo Subtract object size
+   * @todo Improve: Subtract object size.
    * @private
    */
   this.boundsBounce = () => {

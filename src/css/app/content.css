@@ -6,19 +6,18 @@
   width: var(--sg-app-width);
   box-sizing: border-box;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 1rem 2.5rem;
 }
 
 .details .col {
-  width: 50%;
-  height: 100px;
-  margin: auto;
+  width: 100%;
+  margin: 0 2rem 0 0;
 }
 
 .details .text {
   color: var(--sg-color-text);
   font-family: var(--sg-font-primary);
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   display: inline-block;
   box-sizing: border-box;
   margin: 5px 0;

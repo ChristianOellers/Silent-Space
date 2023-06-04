@@ -8,6 +8,7 @@ function Core_Ui_Menu() {
   this.readyCallback = null;
 
   // Assets
+  this.appElement = document.getElementById('App');
   this.btnPlayElement = document.getElementById('Ui-Btn-Play');
   this.menuElement = document.getElementById('Ui-Menu');
 
@@ -63,6 +64,8 @@ function Core_Ui_Menu() {
     if (this.readyCallback) {
       this.readyCallback();
       this.hideMenu();
+      
+      this.appElement.classList.add('-active');
 
       // Reset to prevent duplicate calls
       this.readyCallback = null;

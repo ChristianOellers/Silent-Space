@@ -16,8 +16,11 @@ function Core_Scene() {
   this.appElement = document.getElementById('App');
 
   // General
-  this.backgroundCount = 5;
-  this.particleCount = 3;
+  this.musicVolume = 0.25;
+  this.backgrounds = 5;
+
+  // Cannot be higher now - See 'Stage' todo
+  //this.particleCount = 1;
 
   /**
    * Set game objects.
@@ -32,6 +35,16 @@ function Core_Scene() {
     this.Stage = Stage;
 
     this.createBackground();
+    this.bind();
+  };
+
+  /**
+   * Bind events.
+   *
+   * @private
+   */
+  this.bind = () => {
+    window.addEventListener('Fx-Displace', this.onDisplaceFx.bind(this));
   };
 
   /**
@@ -54,7 +67,7 @@ function Core_Scene() {
    */
   this.createBackground = () => {
     const { appElement } = this;
-    const rndStaticBackground = (Math.random() * this.backgroundCount) | 0;
+    const rndStaticBackground = (Math.random() * this.backgrounds) | 0;
 
     this.Background.init();
 
@@ -68,9 +81,15 @@ function Core_Scene() {
    * @private
    */
   this.createObjects = () => {
+    const p = new this.ParticleType();
+    this.Stage.add(p, 'Particles');
+
+    /* Future use * /
     for (let i = 0; i < this.particleCount; i++) {
-      this.Stage.add(new this.ParticleType(), 'Particles');
+      const p = new this.ParticleType();
+      this.Stage.add(p, 'Particles');
     }
+    /* */
   };
 
   /**
@@ -87,15 +106,29 @@ function Core_Scene() {
 
   /**
    * Play music.
-   *
+   *c
    * @private
    */
   this.playMusic = () => {
     const { musicElement } = this;
 
-    musicElement.volume = 0.5;
-
     musicElement.load();
+    musicElement.volume = this.musicVolume;
     musicElement.play();
+  };
+
+  /**
+   * On displace Fx (player hit with shield).
+   *
+   * @todo Refactor - Unfortunate coupling to effect 'dictating' time
+   * @see Core_Fx_Displace
+   * @private
+   */
+  this.onDisplaceFx = (_event) => {
+    this.musicElement.volume = this.musicVolume / 2;
+
+    setTimeout(() => {
+      this.musicElement.volume = this.musicVolume;
+    }, 250);
   };
 }

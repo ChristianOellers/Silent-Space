@@ -42,23 +42,27 @@ function Core_Fx_Anaglyph3D() {
   /**
    * Animate effect.
    *
+   * @todo Optimize - Split complex code
    * @private
    */
   this.animate = () => {
-    const dxLeft = +this.svgFilterLeft.getAttribute('dx');
-    const dxRight = +this.svgFilterRight.getAttribute('dx');
+    const svgFilterL = this.svgFilterLeft;
+    const svgFilterR = this.svgFilterRight;
+    const dxLeft = +svgFilterL.getAttribute('dx');
+    const dxRight = +svgFilterR.getAttribute('dx');
 
     this.interval = setInterval(() => {
       this.currentTime++;
 
       if (this.currentTime < this.totalTime) {
-        this.svgFilterLeft.setAttribute('dx', Math.random() * -4);
-        this.svgFilterRight.setAttribute('dx', Math.random() * 4);
+        svgFilterL.setAttribute('dx', Math.random() * -4);
+        svgFilterR.setAttribute('dx', Math.random() * 4);
       } else {
         clearInterval(this.interval);
 
-        this.svgFilterLeft.setAttribute('dx', 0);
-        this.svgFilterRight.setAttribute('dx', 0);
+        svgFilterL.setAttribute('dx', 0);
+        svgFilterR.setAttribute('dx', 0);
+
         this.isRunning = false;
         this.interval = null;
         this.currentTime = 0;

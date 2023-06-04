@@ -1,7 +1,8 @@
 /**
  * Stage manager for objects and canvas elements.
  *
- * @todo Decouple Stage from Loop and DOM requirements?
+ * @todo Improve: Allow multiple objects per canvas (currently fixated at one).
+ * @todo Refactor: Decouple Stage from Loop and DOM requirements.
  * @module
  */
 function Core_Stage() {

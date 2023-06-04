@@ -27,8 +27,22 @@
   user-select: none;
   transition: 0.5s;
   will-change: filter;
+  animation: pulse 2s infinite;
 }
 
 .menu .btn:hover {
-  filter: saturate(1.5) brightness(1.2);
+  filter: saturate(1.5) brightness(1.5) !important;
+  animation: none;
+  width: 18rem;
+  height: 3.25rem;
 }
+
+@keyframes pulse {
+  0% {
+    filter: brightness(1);
+  }
+  75% {
+    filter: brightness(1.5);
+  }
+}
+

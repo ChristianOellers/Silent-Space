@@ -1,7 +1,7 @@
 /**
  * Animated parallax background.
  *
- * @todo Refactor duplicate code + Split into micro-libraries (generation, queue, animation).
+ * @todo Refactor: Duplicate code, Split into micro-libraries (generation, queue, animation).
  * @module
  */
 function Obj_Background() {
@@ -18,7 +18,7 @@ function Obj_Background() {
 
   // Tiles
   this.TileTypes0Count = 4; // Different tile graphics (img assets), Number 0-N
-  this.TileTypes1Count = 6; // Different tile graphics (img assets), Number 0-N
+  this.TileTypes1Count = 9; // Different tile graphics (img assets), Number 0-N
   this.TileTypes0 = []; // Available different tile types
   this.TileTypes1 = []; // Available different tile types
 

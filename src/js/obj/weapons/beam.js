@@ -1,16 +1,18 @@
 /**
  * Weapon type - Beam.
  *
- * @todo Replace math by library functions.
- * @todo  Outsource sound.
+ * @todo Improve: Randomize explosion audio?
+ * @todo Refactor: Replace math by library functions.
+ * @todo Refactor: Outsource sound.
  * @module
  */
 function Obj_Weapon_Beam() {
   // Dependencies
   this.CanvasHelper = null;
+  this.MathHelper = null;
 
   // Assets
-  this.audio = document.getElementById('Sound-Explosions-Beam');
+  this.audio = document.getElementById('Sound-Explosions-0');
   this.sprite = document.getElementById('Asset-Weapon-Beam');
 
   // Graphic
@@ -18,9 +20,6 @@ function Obj_Weapon_Beam() {
   this.ctx = this.canvas.getContext('2d');
   this.width = 8; // Sprite width in px
   this.height = 25; // Sprite height in px
-
-  // Sound
-  this.audio.volume = 1;
 
   // Weapon
   this.originX = 0; // Initial X coordinate
@@ -31,7 +30,7 @@ function Obj_Weapon_Beam() {
   this.speed = 10; // Current speed
   this.acceleration = 0.3; // Acceleration factor
   this.rotation = 0; // Current rotation
-  this.hitChance = 50; // Percentage
+  this.hitChance = 70; // Percentage
 
   // Internals
   this.isUpdating = false; // Prevent parallel updates of the game
@@ -46,6 +45,7 @@ function Obj_Weapon_Beam() {
    */
   this.init = () => {
     this.CanvasHelper = CanvasHelper;
+    this.MathHelper = MathHelper;
   };
 
   /**
@@ -71,6 +71,11 @@ function Obj_Weapon_Beam() {
    */
   this.loop = () => {
     if (this.isUpdating) {
+      return;
+    }
+
+    if (this.remove) {
+      this.CanvasHelper.clear(this.ctx);
       return;
     }
 
@@ -156,7 +161,7 @@ function Obj_Weapon_Beam() {
     this.speed += this.acceleration;
 
     // Remove from stage (arbitrary value)
-    if (this.y < -250) {
+    if (this.y < -400) {
       this.destroySelf();
     }
   };
@@ -170,10 +175,7 @@ function Obj_Weapon_Beam() {
    * @private
    */
   this.getPosX = () => {
-    const rad = this.rotation * (Math.PI / 180);
-    const pos = Math.sin(rad) * this.speed;
-
-    return pos;
+    return this.MathHelper.getPosX(this.rotation, this.speed);
   };
 
   /**
@@ -183,9 +185,6 @@ function Obj_Weapon_Beam() {
    * @private
    */
   this.getPosY = () => {
-    const rad = this.rotation * (Math.PI / 180);
-    const pos = Math.cos(rad) * this.speed * -1;
-
-    return pos;
+    return this.MathHelper.getPosY(this.rotation, this.speed);
   };
 }
