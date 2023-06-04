@@ -107,6 +107,7 @@ function Obj_Background() {
   /**
    * Draw tiles on stage.
    *
+   * @todo Decide: Repurpose background to use as 2nd foreground layer?
    * @private
    */
   this.drawTiles = () => {
