@@ -1,6 +1,6 @@
-[![2D Space Shooter](teaser.png)](https://christianoellers.github.io/2D-Space-Shooter-Concept)
+[![Silent Space](teaser.png)](https://christianoellers.github.io/Silent-Space--2D-Game)
 
-# Space Escape - Experimental space shooter
+# Silent Space - Experimental space shooter
 
 Atmospheric and experimental 2D game concept.
 
@@ -9,13 +9,14 @@ Atmospheric and experimental 2D game concept.
 - [How to use](#how-to-use)
 - [Issues](#issues)
 - [Credits](#credits)
+- [Contributors](#contributors)
 - [Todo](#todo)
 
 <br>
 
 ---
 
-[![Quality Gate status](https://sonarcloud.io/api/project_badges/measure?project=ChristianOellers_2D-Space-Shooter-Concept&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChristianOellers_2D-Space-Shooter-Concept)
+[![Quality Gate status](https://sonarcloud.io/api/project_badges/measure?project=ChristianOellers_Silent-Space--2D-Game&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChristianOellers_Silent-Space--2D-Game)
 <br><br>
 
 ## About
@@ -105,6 +106,14 @@ Audio files are in `.wav` and `.ogg` format. Your browser might support somethin
 | Music | Ambient        | Danny Grübl | © Copyright                                                  | DG-Space-Ambient                                                  | [hans-sperling](https://github.com/hans-sperling)                                                             |
 
 Some sounds have been edited.
+
+<br><br>
+
+## Contributors
+
+Thanks for all the support, help and creative feedback!
+
+- Danny N. Grübl
 
 <br><br>
 
