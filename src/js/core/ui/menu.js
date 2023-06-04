@@ -64,7 +64,7 @@ function Core_Ui_Menu() {
     if (this.readyCallback) {
       this.readyCallback();
       this.hideMenu();
-      
+
       this.appElement.classList.add('-active');
 
       // Reset to prevent duplicate calls

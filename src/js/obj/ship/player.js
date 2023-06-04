@@ -19,7 +19,7 @@ function Obj_Ship_Player() {
   this.spriteDamagedShielded = document.getElementById('Asset-Ship-Damaged-Shielded');
   this.spriteHealthy = document.getElementById('Asset-Ship-Healthy');
   this.spriteHealthyShielded = document.getElementById('Asset-Ship-Healthy-Shielded');
-  
+
   // Assets - Sounds
   this.soundShieldEnabled = document.getElementById('Sound-Shield-Enabled');
   this.soundUiFunctionBlocked = document.getElementById('Sound-Ui-Function-Blocked');
@@ -62,7 +62,7 @@ function Obj_Ship_Player() {
   // Internals
   this.isBeingHit = false;
   this.isUpdating = false;
-  
+
   // DEV + DEBUG
   // Keep empty to randome
   this.overrideWeapon = ''; // beam phaser
@@ -78,7 +78,7 @@ function Obj_Ship_Player() {
     this.FxDisplace = FxDisplace;
     this.MathHelper = MathHelper;
     this.State = State;
-    
+
     this.soundUiFunctionBlocked.volume = 0.1;
 
     this.setWeapon(this.getRandomWeapon());
@@ -173,7 +173,7 @@ function Obj_Ship_Player() {
     const weapon = this.getRandomWeapon();
 
     this.setWeapon(weapon);
-    
+
     // DEV + DEBUG
     if (this.overrideWeapon) {
       this.setWeapon(this.overrideWeapon);
@@ -186,9 +186,9 @@ function Obj_Ship_Player() {
    * @todo Refactor: Change to polymorphic structure.
    */
   this.getRandomWeapon = () => {
-    const rnd = parseInt((Math.random() * 100) % 3);
+    const rnd = parseInt((Math.random() * 100) % 3, 10);
     let weapon = '';
-    
+
     switch (rnd) {
       case 0:
         weapon = 'beam';
@@ -203,7 +203,6 @@ function Obj_Ship_Player() {
 
     return weapon;
   };
-
 
   // ------------------------------------------------------------------------------------------------------- Game loop
 
@@ -704,7 +703,7 @@ function Obj_Ship_Player() {
   this.setPosition = () => {
     this.x += this.velocityX;
     this.y += this.velocityY;
-    
+
     this.State.playerPosition = new this.Ext_Vector2D(this.x, this.y);
 
     /* * /

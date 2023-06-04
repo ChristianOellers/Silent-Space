@@ -2,14 +2,14 @@
  * 2D vector math calculations.
  */
 class Vector2D {
-  constructor (x, y) {
+  constructor(x, y) {
     this.x = x;
     this.y = y;
   }
 
-  normalize () {
-    const x    = this.x;
-    const y    = this.y;
+  normalize() {
+    const { x } = this;
+    const { y } = this;
     const size = Math.sqrt(x * x + y * y);
 
     if (size !== 0) {
@@ -18,54 +18,54 @@ class Vector2D {
     }
   }
 
-  add (vector) {
+  add(vector) {
     this.x += vector.x;
     this.y += vector.y;
   }
 
-  subtract (vector) {
+  subtract(vector) {
     this.x -= vector.x;
     this.y -= vector.y;
   }
 
-  crossProduct (vector) {
-    return (this.x * vector.y) - (this.y * vector.x);
+  crossProduct(vector) {
+    return this.x * vector.y - this.y * vector.x;
   }
 
-  dotProduct (vector) {
-    return (this.x * vector.x) + (this.y * vector.y);
+  dotProduct(vector) {
+    return this.x * vector.x + this.y * vector.y;
   }
 
-  invert () {
+  invert() {
     this.x = -this.x;
     this.y = -this.y;
   }
 
-  rotate (angleRadians) {
-    const x   = this.x;
-    const y   = this.y;
+  rotate(angleRadians) {
+    const { x } = this;
+    const { y } = this;
     const cos = Math.cos(angleRadians);
     const sin = Math.sin(angleRadians);
 
-    this.x = (x * cos) - (y * sin);
-    this.y = (y * cos) + (x * sin);
+    this.x = x * cos - y * sin;
+    this.y = y * cos + x * sin;
   }
 
-  scale (factor) {
+  scale(factor) {
     this.x *= factor;
     this.y *= factor;
   }
 
-  sizeSqrt () {
-    const x = this.x;
-    const y = this.y;
+  sizeSqrt() {
+    const { x } = this;
+    const { y } = this;
 
     return Math.sqrt(x * x + y * y);
   }
 
-  sizeSquared () {
-    const x = this.x;
-    const y = this.y;
+  sizeSquared() {
+    const { x } = this;
+    const { y } = this;
 
     return x * x + y * y;
   }

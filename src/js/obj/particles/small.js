@@ -52,7 +52,7 @@ function Obj_Particle_Small() {
 
     this.initParticle();
     this.drawUpdate();
-    
+
     this.bind();
   };
 
@@ -87,13 +87,13 @@ function Obj_Particle_Small() {
     const border = this.borderDistance;
     const screenWidth = this.ctx.canvas.clientWidth - border;
     const size = this.width;
-    
+
     this.x = border + Math.random() * screenWidth;
     this.y = -(size + Math.random() * size * 4);
     this.rotation = -1 + Math.random() * 1;
     this.speed = this.speedMin + Math.random() * 1.5;
-    this.lifetime = this.lifetimeMin + (Math.random() * 2 * this.lifetimeMin);
-    this.spriteVariant = parseInt((Math.random() * 100) % 3);
+    this.lifetime = this.lifetimeMin + Math.random() * 2 * this.lifetimeMin;
+    this.spriteVariant = parseInt((Math.random() * 100) % 3, 10);
   };
 
   /**
@@ -139,19 +139,19 @@ function Obj_Particle_Small() {
     this.x += this.getPosX() * 1;
     this.y -= this.getPosY() * 1;
     this.lifetime--;
-    
+
     if (this.State.playerPosition) {
       const screenWidth = this.ctx.canvas.clientWidth;
       const screenHeight = this.ctx.canvas.clientHeight;
       const playerPos = this.State.playerPosition;
-      
+
       // Set screen center as 0,0 point
-      playerPos.x = playerPos.x - screenWidth / 2;
-      playerPos.y = playerPos.y - screenHeight / 2;
+      playerPos.x -= screenWidth / 2;
+      playerPos.y -= screenHeight / 2;
       playerPos.normalize();
 
-      this.x = this.x + playerPos.x * 1.25;
-      this.y = this.y + playerPos.y * 1.25;
+      this.x += playerPos.x * 1.25;
+      this.y += playerPos.y * 1.25;
     }
 
     // Reset position
@@ -189,7 +189,7 @@ function Obj_Particle_Small() {
    * @private
    */
   this.onDifficultyChange = (_event) => {
-    const difficulty = this.State.difficulty;
+    const { difficulty } = this.State;
 
     this.lifetimeMin += this.lifetime < this.lifetimeMax ? 1 : 0;
     this.speedMin += this.speed < this.speedMax ? 1 : 0;

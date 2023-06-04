@@ -9,7 +9,7 @@ function Core_Fx_Displace() {
   this.svgFilterDisplace = document.querySelector('#Fx-Displace feDisplacementMap');
   this.svgFilterTurbulence = document.querySelector('#Fx-Displace feTurbulence');
   this.svgFilterOffset = document.querySelector('#Fx-Displace feOffset');
-  
+
   // DOM
   this.canvasGame = document.getElementById('Game');
   this.canvasFG = document.getElementById('Foreground');
@@ -52,8 +52,8 @@ function Core_Fx_Displace() {
    * @private
    */
   this.animate = () => {
-    this.canvasGame.classList.add("fx-displace");
-    this.canvasFG.classList.add("fx-displace");
+    this.canvasGame.classList.add('fx-displace');
+    this.canvasFG.classList.add('fx-displace');
 
     const dx = +this.svgFilterOffset.getAttribute('dx');
     const dy = +this.svgFilterOffset.getAttribute('dy');
@@ -66,7 +66,7 @@ function Core_Fx_Displace() {
       // Conceptually; 1->0 from start to end of time (actual values differ)
       const expiryFactor = Math.cos(this.currentTime / (this.totalTime / Math.PI)) + 1;
 
-      const scaleNew = scaleOriginal - (expiryFactor / 2);
+      const scaleNew = scaleOriginal - expiryFactor / 2;
       const bfNew = bfOriginal * expiryFactor;
 
       this.svgFilterTurbulence.setAttribute('baseFrequency', bfNew);
@@ -78,8 +78,8 @@ function Core_Fx_Displace() {
         this.svgFilterTurbulence.setAttribute('baseFrequency', bfOriginal);
         this.svgFilterDisplace.setAttribute('scale', scaleOriginal);
 
-        this.canvasGame.classList.remove("fx-displace");
-        this.canvasFG.classList.remove("fx-displace");
+        this.canvasGame.classList.remove('fx-displace');
+        this.canvasFG.classList.remove('fx-displace');
 
         this.isRunning = false;
         this.interval = null;

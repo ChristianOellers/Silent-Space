@@ -107,7 +107,7 @@ function Obj_Weapon_Phaser() {
 
     this.isUpdating = false;
   };
-  
+
   /**
    * Graphic animation.
    *
@@ -117,8 +117,8 @@ function Obj_Weapon_Phaser() {
   this.drawGfx = () => {
     const { ctx, x, y, width, height, lifetime, lifespan } = this;
 
-    let percent = (lifetime / lifespan);
-    let widthScale = this.beamLength * width + (width / 2 * percent) / 2;
+    const percent = lifetime / lifespan;
+    const widthScale = this.beamLength * width + ((width / 2) * percent) / 2;
 
     ctx.fillStyle = 'rgba(245, 0, 245, 0.2)';
     ctx.fillRect(50, -4, -50 + widthScale * 1.05, height * 5);
@@ -143,19 +143,19 @@ function Obj_Weapon_Phaser() {
 
     const alpha = this.getGfxAlpha();
 
-    let gradient = ctx.createLinearGradient(0, 0, width, 0);
-    let percent = (lifetime / lifespan);
-    let alphaBack = (alpha / 2) * (percent * 25);
+    const gradient = ctx.createLinearGradient(0, 0, width, 0);
+    const percent = lifetime / lifespan;
+    const alphaBack = (alpha / 2) * (percent * 25);
 
-    const color0 = 'rgba(192, 0, 255, ' + alpha / alphaBack + ')';
-    const color1 = 'rgba(255, 0, 192, ' + alpha + ')';
+    const color0 = `rgba(192, 0, 255, ${alpha / alphaBack})`;
+    const color1 = `rgba(255, 0, 192, ${alpha})`;
 
     gradient.addColorStop(0, color0);
     gradient.addColorStop(1, color1);
 
     return gradient;
   };
-  
+
   /**
    * Alpha value animation.
    *
@@ -170,7 +170,7 @@ function Obj_Weapon_Phaser() {
     // 1)
     const alpha = Math.cos(lifetime / (lifespan / Math.PI)) * 0.5 + 1;
 
-    return (alpha > 1) ? 1 : alpha;
+    return alpha > 1 ? 1 : alpha;
   };
 
   /**
@@ -253,4 +253,3 @@ function Obj_Weapon_Phaser() {
     return this.MathHelper.getPosY(this.rotation, this.speed);
   };
 }
-
