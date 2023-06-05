@@ -1,4 +1,4 @@
-[![Silent Space](teaser.png)](https://christianoellers.github.io/Silent-Space--2D-Game)
+[![Silent Space](teaser.png)](https://christianoellers.github.io/Silent-Space)
 
 # Silent Space - Experimental space shooter
 
@@ -16,7 +16,7 @@ Atmospheric and experimental 2D game concept.
 
 ---
 
-[![Quality Gate status](https://sonarcloud.io/api/project_badges/measure?project=ChristianOellers_Silent-Space--2D-Game&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChristianOellers_Silent-Space--2D-Game)
+[![Quality Gate status](https://sonarcloud.io/api/project_badges/measure?project=ChristianOellers_Silent-Space&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChristianOellers_Silent-Space)
 <br><br>
 
 ## About
