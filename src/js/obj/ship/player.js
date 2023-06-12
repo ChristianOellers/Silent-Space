@@ -190,14 +190,18 @@ function Obj_Ship_Player() {
 
   /**
    * Get random weapon type.
+   * Give a 1:2 chance to visually preferred variant (cosmetic decision).
+   *
+   * Old algorithm
+   * - parseInt((Math.random() * 100) % weaponTypes, 10);
    *
    * @todo Refactor: Change to polymorphic structure.
    */
   this.getRandomWeapon = () => {
     const weaponTypes = 2;
-    const rnd = parseInt((Math.random() * 100) % weaponTypes, 10);
+    const isRare = (Math.random() * 100) % weaponTypes <= 0.3;
 
-    return !rnd ? 'beam' : 'phaser';
+    return isRare ? 'beam' : 'phaser';
   };
 
   // ------------------------------------------------------------------------------------------------------- Game loop
