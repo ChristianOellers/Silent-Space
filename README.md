@@ -5,9 +5,7 @@
 Atmospheric and experimental 2D game concept.
 
 - [About](#about)
-- [Examples](#examples)
-- [How to use](#how-to-use)
-- [Issues](#issues)
+- [Setup](#setup)
 - [Credits](#credits)
 - [Contributors](#contributors)
 - [Todo](#todo)
@@ -25,30 +23,23 @@ A proof of concept about what can be done with plain Canvas, JavaScript and a bi
 
 It's been intended to be somewhat 'arcade-ish', but with a more decent pace and visual focus.
 
+### Compatibility
+
+- Browser with Canvas 2D API support
+- Desktop PC with min. 800px screen width
+- Decent computing/ graphics power (can be resource intense)
+- Mouse, keyboard, audio output
+
 ### Playing
 
-There are a few implicit and random mechanics, as these have been simple to realize without too much conceptual complexity.
+There are no goals or enemies yet, but a score for your numeric needs.
 
-Besides hopefully enjoying the in-game visuals and audio, there's not much to do yet. Let it run as background animation if you like, get inspired; or challenged by the greatest enemy of all: The monstrous source code.
+- Every game start (or reload) generates a different background ambiente, music, and slight ship settings
+- Weapon can change randomly on hit (sth. out of screen ;)
+- Difficulty increases over time and affects e.g. particle speed
+- Being hit by particle is seemingly unpleasant, and a different experience with or without shield
 
-#### Mechanics
-
-- Every game start (or reload) generates a different background and some ship settings change slightly
-- Shooting the weapon might hit something out of screen
-  - On every hit, there's a chance to switch weapons randomly
-
-#### Effects
-
-- Background changes position over time
-- Shield activation causes HUD flickering
-- Being hit by space debris ...
-  - changes ship model to broken state
-  - causes screen flickering (stereo 3D effect)
-  - changes shield color (visible on next activation)
-
-### Code
-
-History
+### History
 
 - 2013: Project start, concepts and mostly graphics. Received few random updates over later years.
 - 2020: I decided to start rebuilding it with current technologies and skills, but it's quite a process!
@@ -59,49 +50,22 @@ History
 - [Play »](https://christianoellers.github.io/Silent-Space)
 - [See code »](https://github.com/ChristianOellers/Silent-Space/tree/gh-pages)
 
-### Features & Gameplay
-
-- On each game start the ship attributes, weapons and sounds are slightly randomized.
-- You can shoot, toggle the shields and move the ship.
-  - Shooting might explode something mysterious out of screen and reward you with a screen shake
-
-There are no actual enemies yet. Please use your nerdy imagination for that.
-
 <br>
 
 ---
 
 <br>
 
-## How to use
+## Setup
 
-1. Choose a _Desktop_ browser that supports the Canvas API. _(The game does not support a responsive layout, mobile devices or touch gestures.)_
-2. If used locally: You'll need a local web server due to cross-origin restrictions with some of the files.
+If used locally: You might need a local web server due to potential cross-origin restrictions with some of the files.
 
-   - Install Node.js and the project dependencies
-   - Run `npm run start` to start a local webserver
+- Install Node.js and the project dependencies
+- Run `npm run start` to start a local webserver
 
 <br>
 
 ---
-
-<br>
-
-## Issues
-
-### Audio not playing
-
-Browsers might block automatic playing audio. Workaround to manually trigger this: When loading the game, simultaneously click somewhere in the page (fast, one or more times).
-
-Audio files are in `.wav` and `.ogg` format. Your browser might support something which is not available. In that case, please use another browser (like Chrome or Firefox).
-
-### Code quality
-
-As this has been developed as pure proof of concept, across 10+ years so far; it is considered legacy.
-There's many bad practices like closely coupled code. Writing a game that involves changing feature sets and design decisions is a time consuming task.
-That's why I considered to spend my spare time on developing the game itself, not making the code beautiful.
-
-See it as technology junkyard, to pick from what you need and build your own ;)
 
 <br>
 
@@ -110,6 +74,12 @@ See it as technology junkyard, to pick from what you need and build your own ;)
 <br>
 
 ## Credits
+
+### Contributors
+
+Thanks for all the support, help and creative feedback!
+
+- Danny N. Grübl
 
 ### Audio files
 
@@ -123,18 +93,6 @@ See it as technology junkyard, to pick from what you need and build your own ;)
 | Music | Ambient        | Danny Grübl | © Copyright                                                  | DG-Space-Ambient                                                  | [hans-sperling](https://github.com/hans-sperling)                                                             |
 
 Some sounds have been edited.
-
-<br>
-
----
-
-<br>
-
-## Contributors
-
-Thanks for all the support, help and creative feedback!
-
-- Danny N. Grübl
 
 <br>
 
