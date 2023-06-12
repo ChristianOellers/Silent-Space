@@ -1,0 +1,164 @@
+/* ----------------------------------------------------------------------------------------------------------- Layout */
+
+html,
+body {
+    background: #000;
+}
+
+section#GameHolder {
+    margin: 10vh auto 0;
+    position: relative;
+    width: 800px;
+    height: 500px;
+    overflow: hidden;
+    border: 1px solid #222;
+}
+
+section#Help {
+    margin: 0 auto;
+    width: 800px;
+}
+
+#GameHolder canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#Assets {
+    display: none;
+}
+
+
+.static-image #Background {
+    display: none;
+}
+
+.static-image {
+    /* 5 min */
+    animation-duration: 300s;
+    animation-name: move-bg; 
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.static-image-0 { background: url("https://christianoellers.github.io/HTML5-Canvas--2D-Space-Shooter-Game/Assets/Image/Background/Static/0.jpg") 0% 0%; }
+.static-image-1 { background: url("https://christianoellers.github.io/HTML5-Canvas--2D-Space-Shooter-Game/Assets/Image/Background/Static/1.jpg") 0% 0%; }
+.static-image-2 { background: url("https://christianoellers.github.io/HTML5-Canvas--2D-Space-Shooter-Game/Assets/Image/Background/Static/2.jpg") 0% 0%; }
+.static-image-3 { background: url("https://christianoellers.github.io/HTML5-Canvas--2D-Space-Shooter-Game/Assets/Image/Background/Static/3.jpg") 0% 0%; }
+
+@-webkit-keyframes move-bg {
+    0% {
+        background-position: 0% 0%
+    }
+    25% { 
+        background-position: 100% 100%
+    }
+    50% { 
+        background-position: 50% 50%
+    }
+    75% { 
+        background-position: 100% 0%
+    }
+    100% { 
+        background-position: 0% 0%
+    }
+}
+
+
+/* --------------------------------------------------------------------------- Temp / Dev content */
+
+.video-rendering {
+    margin: 50px 0;
+    display: block;
+    position: relative;
+    opacity: 0.2;
+}
+
+.video-rendering:hover {
+    opacity: 1;
+}
+
+.tmp {
+    border: 1px solid #222;
+}
+
+#VideoShield {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* -------------------------------------------------------------------------------------------------------- Animation */
+/* -------------------------------------------------------------------------------------- Fade in */
+
+#Fade {
+    background: #000;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 800px;
+    height: 500px;
+    opacity: 1;
+    animation-name: animateFade;
+    animation-delay: 0s;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-direction: alternate;
+    animation-fill-mode: forwards;
+    animation-play-state: running;
+}
+
+@keyframes animateFade {
+    0% {
+        background: rgba(0, 0, 0, 1);
+    }
+    100% {
+        background: rgba(0, 0, 0, 0);
+    }
+}
+
+
+/* --------------------------------------------------------------------------------- Screen shake */
+
+#Fx {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+#Fx.shake {
+    left: 0px;
+    top: 0px;
+    animation-name: animateShakeFx;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-timing-function: ease-in-out;
+    animation-play-state: running;
+}
+
+@keyframes animateShakeFx {
+      0% { left: 0px; top: 0px;   }
+      5% { left: -1px; top: -1px; }
+     10% { left: -1px; top: 1px;  }
+     15% { left: 2px; top: -1px;  }
+     20% { left: 1px; top: 1px;   }
+     25% { left: 1px; top: 1px;   }
+     30% { left: -1px; top: 2px;  }
+     35% { left: 2px; top: 0px;   }
+     40% { left: 1px; top: -1px;  }
+     45% { left: -1px; top: 1px;  }
+     50% { left: -1px; top: 0px;  }
+     55% { left: 2px; top: -1px;  }
+     60% { left: 0px; top: 0px;   }
+     65% { left: 1px; top: -1px;  }
+     70% { left: -1px; top: 1px;  }
+     75% { left: 0px; top: 2px;   }
+     80% { left: 0px; top: -1px;  }
+     85% { left: 2px; top: 1px;   }
+     90% { left: -1px; top: 0px;  }
+     95% { left: 1px; top: 0px;   }
+    100% { left: 0px; top: 0px;   }
+}
+

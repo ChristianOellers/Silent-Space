@@ -1,0 +1,103 @@
+/* ------------------------------------------------------------------------------------------------------------ (all) */
+
+* {
+    margin:0;
+    padding:0;
+    -ms-text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    font-size:100%;
+    font-family:inherit;
+    font-weight:inherit;
+    font-style:inherit;
+    vertical-align:baseline;
+    -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
+    -webkit-touch-callout:none;
+    -moz-box-sizing:border-box;
+    -ms-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+body {
+    text-rendering:optimizeLegibility;
+}
+
+
+/* ---------------------------------------------------------------------------------------------------------- Content */
+
+header, nav, section,
+article, footer {
+    display:block;
+}
+
+figure, video, audio {
+    display:block;
+}
+
+iframe, img {
+    border:none;
+}
+
+/** /
+iframe::-webkit-scrollbar {
+    display:none;
+}
+/**/
+
+a {
+    text-decoration:none;
+}
+
+:focus {
+    outline:none;
+}
+
+
+/* ------------------------------------------------------------------------------------------------------------- Form */
+
+form, fieldset, button, input,
+textarea, select, option {
+    background-color:transparent;
+    border:none;
+}
+
+textarea {
+    overflow:auto;
+    vertical-align:top;
+}
+
+button, input, select, textarea {
+    font-size:100%;
+    vertical-align:baseline;
+    *vertical-align:middle;
+}
+
+button, input {
+    line-height:normal;
+}
+
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    cursor:pointer;
+    -webkit-appearance:button;
+    *overflow:visible;
+}
+
+input[type="search"],
+input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance:textfield;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    padding:0;
+}
+
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+    border:0;
+    padding:0;
+}
+

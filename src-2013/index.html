@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>SpaceGame</title>
+    <link rel="stylesheet" href="Css/Reset.css">
+    <link rel="stylesheet" href="Css/Layout.css">
+    <link rel="stylesheet" href="Css/Content.css">
+</head>
+<body>
+
+    <section id="GameHolder">
+        <div id="Fx">
+            <canvas width="800" height="500" id="Background"></canvas>
+            <canvas width="800" height="500" id="Particles"></canvas>
+            <canvas width="800" height="500" id="Weapons"></canvas>
+            <canvas width="800" height="500" id="Game"></canvas>
+            <canvas width="800" height="500" id="Foreground"></canvas>
+            <canvas width="800" height="500" id="Hud"></canvas>
+            <div id="Fade"></div>
+        </div>
+    </section>
+
+    <section id="Help">
+        <p>
+            Arrows = Move, C = Shield, F = Fire. Active shield disallows fire. <br>
+            Game is not finished and has no hit testing.
+        </p>
+        <p class="tip">Spoiler alert: Don't wait for any enemies ... ;)</p>
+    </section>
+
+
+    <div id="Assets">
+        <!-- Audio: Change to WAV if OGG does not work -->
+
+        <!-- Music -->
+        <audio id="MusicAmbient" preload autobuffer> <source src="Assets/Audio/Music/DG-Space-Ambient.ogg" type="audio/ogg"> <source src="Assets/Audio/Music/DG-Space-Ambient.wav" type="audio/wav"> </audio>
+
+        <!-- Sounds -->
+        <audio preload autobuffer id="SoundEngineThruster">  <source src="Assets/Audio/EngineThruster.ogg"  type="audio/ogg"> <source src="Assets/Audio/EngineThruster.wav"  type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundExplosion-1">     <source src="Assets/Audio/Explosion-1.ogg"     type="audio/ogg"> <source src="Assets/Audio/Explosion-1.wav"     type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundExplosion-2">     <source src="Assets/Audio/Explosion-2.ogg"     type="audio/ogg"> <source src="Assets/Audio/Explosion-2.wav"     type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundFunctionBlocked"> <source src="Assets/Audio/FunctionBlocked.ogg" type="audio/ogg"> <source src="Assets/Audio/FunctionBlocked.wav" type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundLaser-1">         <source src="Assets/Audio/Laser-1.ogg"         type="audio/ogg"> <source src="Assets/Audio/Laser-1.wav"         type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundLaser-2">         <source src="Assets/Audio/Laser-2.ogg"         type="audio/ogg"> <source src="Assets/Audio/Laser-2.wav"         type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundLaserReady">      <source src="Assets/Audio/LaserReady.ogg"      type="audio/ogg"> <source src="Assets/Audio/LaserReady.wav"      type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundShieldEnabled">   <source src="Assets/Audio/ShieldEnabled.ogg"   type="audio/ogg"> <source src="Assets/Audio/ShieldEnabled.wav"   type="audio/wav"></audio>
+        <audio preload autobuffer id="SoundShieldCharge">    <source src="Assets/Audio/ShieldCharge.ogg"    type="audio/ogg"> <source src="Assets/Audio/ShieldCharge.wav"    type="audio/wav"></audio>
+
+        <!-- Background -->
+        <img id="Tile-0-0" src="Assets/Image/Background/0.jpg">
+        <img id="Tile-0-1" src="Assets/Image/Background/1.jpg">
+        <img id="Tile-0-2" src="Assets/Image/Background/2.jpg">
+        <img id="Tile-0-3" src="Assets/Image/Background/3.jpg">
+        <img id="Tile-0-4" src="Assets/Image/Background/4.jpg">
+
+        <!-- Foreground -->
+        <img id="Tile-1-0" src="Assets/Image/Foreground/0.png">
+        <img id="Tile-1-1" src="Assets/Image/Foreground/1.png">
+        <img id="Tile-1-2" src="Assets/Image/Foreground/2.png">
+        <img id="Tile-1-3" src="Assets/Image/Foreground/3.png">
+        <img id="Tile-1-4" src="Assets/Image/Foreground/4.png">
+        <img id="Tile-1-5" src="Assets/Image/Foreground/5.png">
+        <img id="Tile-1-6" src="Assets/Image/Foreground/6.png">
+
+        <!-- Objects -->
+        <img id="Asset_Particle"     src="Assets/Image/Object/Particle.png">
+        <img id="Asset_Ship"         src="Assets/Image/Object/Ship.png">
+        <img id="Asset_ShipShielded" src="Assets/Image/Object/ShipShielded.png">
+        <img id="Asset_Shield0"      src="Assets/Image/Object/Shield0.png">
+        <img id="Asset_Shield1"      src="Assets/Image/Object/Shield1.png">
+        <img id="Asset_Weapon_Laser" src="Assets/Image/Object/Weapon/Laser.png">
+
+        <!-- HUD -->
+        <img id="Asset_HudShip" src="Assets/Image/Hud/Ship.png">
+    </div>
+
+
+    <!-- Video -->
+    <div class="video-rendering hidden">
+        <p>OLD/WIP test - Canvas video rendering:</p>
+        <p>Under, Over, Source</p>
+        <br>
+
+        <canvas width="115" height="211" class="tmp" id="CanvasCopyUnder"></canvas>
+        <canvas width="115" height="211" class="tmp" id="CanvasCopyOver"></canvas>
+        <video  width="96"  height="80"  class="tmp" id="VideoShield">
+            <source src="Assets/Video/Shield.webm"      type="video/webm">
+            <source src="Assets/Video/Shield/video.ogv" type="video/ogg">
+            <source src="Assets/Video/Shield/video.mp4" type="video/mp4">
+        </video>
+    </div>
+
+
+    <!-- Globals -->
+    <script defer src="Js/Globals.js"></script>
+
+    <!-- Libraries -->
+    <script defer src="Js/Lib/CanvasHelper.js"></script>
+    <script defer src="Js/Lib/MathHelper.js"></script>
+    <script defer src="Js/Lib/Web/ContextBlender.js"></script>
+    <script defer src="Js/Lib/Web/KeyHandler.js"></script>
+    <script defer src="Js/Lib/Web/requestAnimationFrame.js"></script>
+
+    <!-- Core -->
+    <script defer src="Js/Core/Loop.js"></script>
+    <script defer src="Js/Core/Stage.js"></script>
+    <script defer src="Js/Core/Fx.js"></script>
+    <script defer src="Js/Core/Hud.js"></script>
+
+    <!-- Objects -->
+    <script defer src="Js/Obj/Ship/Player.js"></script>
+    <script defer src="Js/Obj/Weapon/Laser.js"></script>
+    <script defer src="Js/Obj/Background.js"></script>
+    <script defer src="Js/Obj/Particle.js"></script>
+
+    <!-- Init -->
+    <script defer src="Js/Init.js"></script>
+
+</body>
+</html>
+

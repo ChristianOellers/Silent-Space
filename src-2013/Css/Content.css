@@ -1,0 +1,31 @@
+/* ---------------------------------------------------------------------------------------------------------- Content */
+
+
+p {
+    color: #333;
+    font-size: 0.75rem;
+    font-family: sans-serif;
+    display: inline-block;
+    margin: 5px 0;
+}
+
+.tip {
+    color: #222;
+    display: inline-block;
+    float: right;
+}
+
+.hidden {
+    display: none;
+}
+
+
+::-moz-selection {
+    color: #666;
+    background: #222;
+}
+
+::selection {
+    color: #666;
+    background: #222;
+}
