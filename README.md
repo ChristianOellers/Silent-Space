@@ -3,9 +3,6 @@
 Historical release from 2013 with only minor updates in later years up to 2019.
 Intended as reference to compare to future changes and refactoring progress.
 
-Archived due to GitHub issues with uppercase letter naming convention on certain environments.
-Thus, it's contained in an unrelated Git history and comes in a safe ZIP package.
-
 <br><br>
 
 ## Credits
