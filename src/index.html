@@ -19,13 +19,13 @@
     <link rel="stylesheet" href="css/app/menu.css" />
   </head>
   <body id="App-Container">
-    <div id="Bg-Blur"></div>
+    <div id="Bg-Blur" class="bg-blur"></div>
 
     <main>
       <section id="App" class="app">
         <div id="Fx" class="app-layer">
           <canvas width="800" height="500" id="Particles"></canvas>
-          <canvas width="800" height="500" id="Weapons"></canvas>
+          <canvas width="800" height="500" id="Weapons" class="layer-weapons"></canvas>
           <canvas width="800" height="500" id="Game"></canvas>
           <canvas width="800" height="500" id="Foreground"></canvas>
           <canvas width="800" height="500" id="Foreground-Blur"></canvas>
@@ -51,6 +51,8 @@
         </p>
       </section>
     </main>
+
+    <div class="mobile-hint">Please run this game from a Desktop browser with keyboard and mouse support.</div>
 
     <!-- Assets -->
     <div class="hidden">

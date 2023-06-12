@@ -2,7 +2,7 @@
  * Blending effect improvements.
  */
 
-#Weapons {
+.layer-weapons {
   mix-blend-mode: lighten;
 }
 
@@ -10,7 +10,7 @@
  * Blurry background + animation.
  */
 
-#Bg-Blur {
+.bg-blur {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@
   z-index: 0;
 }
 
-#Bg-Blur.-active {
+.bg-blur.-active {
   backdrop-filter: blur(0);
 }
 

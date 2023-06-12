@@ -5,3 +5,24 @@ body {
   /* Intentionally enforced as browser scrollbars interfere with the game controls */
   overflow: hidden;
 }
+
+/* Mobile version */
+
+.mobile-hint {
+  display: none;
+}
+
+@media screen and (max-width: 799px) {
+  main {
+    display: none;
+  }
+
+  .mobile-hint {
+    color: var(--sg-color-btn-text);
+    font-family: var(--sg-font-primary);
+    text-align: center;
+    display: inherit;
+    position: absolute;
+    margin: 5%;
+  }
+}
