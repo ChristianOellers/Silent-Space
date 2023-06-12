@@ -1,9 +1,9 @@
 {
-  "name": "2d-space-shooter-concept",
-  "description": "2D Space Shooter Concept",
+  "name": "silent-space",
+  "description": "Silent Space - Experimental space shooter",
   "author": "Christian Oellers",
   "license": "MIT",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "npx serve 'src'",

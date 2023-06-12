@@ -1,4 +1,4 @@
-[![Silent Space](teaser.png)](https://christianoellers.github.io/Silent-Space)
+[![Silent Space](teaser.png)](https://silent-space.vercel.app)
 
 # Silent Space - Experimental space shooter
 
@@ -54,7 +54,10 @@ History
 - 2020: I decided to start rebuilding it with current technologies and skills, but it's quite a process!
 - 2023: Rebuild all graphics, new game mechanics, audio, win/lose conditions, additional Fx.
 
-- [View historical release »](https://github.com/ChristianOellers/2D-Space-Shooter-Concept/releases)
+#### 2013 version
+
+- [Play »](https://christianoellers.github.io/Silent-Space)
+- [See code »](https://github.com/ChristianOellers/Silent-Space/tree/gh-pages)
 
 ### Features & Gameplay
 
@@ -64,15 +67,11 @@ History
 
 There are no actual enemies yet. Please use your nerdy imagination for that.
 
-<br><br>
+<br>
 
-## Examples
+---
 
-Find the live version to play here:
-
-- [Play game »](https://christianoellers.github.io/2D-Space-Shooter-Concept)
-
-<br><br>
+<br>
 
 ## How to use
 
@@ -82,7 +81,11 @@ Find the live version to play here:
    - Install Node.js and the project dependencies
    - Run `npm run start` to start a local webserver
 
-<br><br>
+<br>
+
+---
+
+<br>
 
 ## Issues
 
@@ -100,7 +103,11 @@ That's why I considered to spend my spare time on developing the game itself, no
 
 See it as technology junkyard, to pick from what you need and build your own ;)
 
-<br><br>
+<br>
+
+---
+
+<br>
 
 ## Credits
 
@@ -117,7 +124,11 @@ See it as technology junkyard, to pick from what you need and build your own ;)
 
 Some sounds have been edited.
 
-<br><br>
+<br>
+
+---
+
+<br>
 
 ## Contributors
 
@@ -125,7 +136,11 @@ Thanks for all the support, help and creative feedback!
 
 - Danny N. Grübl
 
-<br><br>
+<br>
+
+---
+
+<br>
 
 ## Todo
 
