@@ -13,9 +13,6 @@ Atmospheric and experimental 2D game concept.
 
 ---
 
-[![Quality Gate status](https://sonarcloud.io/api/project_badges/measure?project=ChristianOellers_Silent-Space&metric=alert_status)](https://sonarcloud.io/dashboard?id=ChristianOellers_Silent-Space)
-<br><br>
-
 ## About
 
 A proof of concept about what can be done with plain Canvas, JavaScript and a bit of auditory and visual trickery.
